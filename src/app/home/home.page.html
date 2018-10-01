@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Trabalho Ionic P2
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+        <ion-card-title>Acesso Usuário</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-input required type="text" placeholder="Nome" [(ngModel)]="userName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input required type="password" placeholder="Senha" [(ngModel)]="userPassword"></ion-input>
+      </ion-item>
+
+      <br>
+
+      <ion-button expand="full" (click)="login()"><ion-icon name="person"></ion-icon> &nbsp; Login</ion-button>
+
+      <br>
+
+      <a (click)="recoveryPassword()">Recuperar Senha</a>
+    </ion-card-content>
+</ion-card>
+</ion-content>
