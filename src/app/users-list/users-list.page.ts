@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalService } from './../service/global.service';
 
 @Component({
   selector: 'app-users-list',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersListPage implements OnInit {
 
-  constructor() { }
+  pageTheme: string;
+
+  constructor(private service: GlobalService) { }
 
   ngOnInit() {
+    this.pageTheme = this.service.userTheme;
   }
 
 }

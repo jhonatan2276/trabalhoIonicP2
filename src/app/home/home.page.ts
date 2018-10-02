@@ -10,7 +10,15 @@ import { HomeService } from '../service/home.service';
 })
 export class HomePage {
 
+  userName: string;
+  userPassword: string;
+
   constructor (private service: GlobalService, private homeService: HomeService, private router: Router) {}
+
+  login() {
+    this.service.getUsers(this.userName, this.userPassword);
+    
+  }
 
   recoveryPassword() {
     this.homeService.recoveryPasswordAlert();
