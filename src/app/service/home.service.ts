@@ -29,11 +29,11 @@ export class HomeService {
           }
         }, {
           text: 'Ok',
-          handler: () => {
+          handler: data => {
             this.service.simpleAlert(
               "Recuperação de Senha",
-              "Confirmação",
-              "Você receberá um email com instruções para Recuperação de Acesso."
+              "Um email com instruções foi enviando para:",
+              data.email
             )
           }
         }

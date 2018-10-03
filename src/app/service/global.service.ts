@@ -9,8 +9,9 @@ import { Router } from '@angular/router';
 export class GlobalService {
 
   url: string = "http://localhost:3000/users";
+  userName: string
   userTheme: string;
-  data: any;
+  userType: number;
 
   constructor(private http: HttpClient, private alert: AlertController, private router: Router) { }
 
@@ -25,29 +26,13 @@ export class GlobalService {
     await alert.present();
   }
 
-  getUsers(name, password) {
+  getUsers() {
     return this.http.get(this.url)
-    .subscribe(data => {
-      this.data = data;
+  }
 
-      //alert(this.data[0].nome);
-
-      console.log(this.data)
-
-      for (let user of this.data) {
-        //if ((user.name == name) && (user.password == password)) {
-        if (user.name == name) {
-         // alert("ok");
-          this.userTheme = user.theme;
-          this.router.navigate(['/users-list']);
-          console.log(user.theme);
-          break;
-        } else {
-          console.log("Erro")
-          //alert("erro");
-          //break;
-        }
-      }
-    });
+  catchUserData(name, type, theme) {
+    this.userName = name;
+    this.userType = type;
+    this.userTheme = theme;
   }
 }

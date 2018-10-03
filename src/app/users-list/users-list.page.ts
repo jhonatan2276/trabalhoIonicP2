@@ -9,11 +9,12 @@ import { GlobalService } from './../service/global.service';
 export class UsersListPage implements OnInit {
 
   pageTheme: string;
+  userName: string
 
   constructor(private service: GlobalService) { }
 
   ngOnInit() {
+    this.userName = this.service.userName;
     this.pageTheme = this.service.userTheme;
   }
-
 }
