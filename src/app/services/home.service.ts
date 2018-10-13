@@ -7,10 +7,10 @@ import { GlobalService } from './global.service';
 })
 export class HomeService {
 
-  constructor(private service: GlobalService, private alerta: AlertController) { }
+  constructor(private service: GlobalService, private alertController: AlertController) { }
 
   async recoveryPasswordAlert() {
-    const alert = await this.alerta.create({
+    const alert = await this.alertController.create({
       header: 'Informe seu E-mail:',
       inputs: [
         {
@@ -25,7 +25,7 @@ export class HomeService {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Ação Cancelada');
+            console.log('Canceled');
           }
         }, {
           text: 'Ok',

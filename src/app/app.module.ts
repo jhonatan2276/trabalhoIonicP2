@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
-import { GlobalService } from './service/global.service';
+import { GlobalService } from './services/global.service';
 
 @NgModule({
   declarations: [AppComponent],

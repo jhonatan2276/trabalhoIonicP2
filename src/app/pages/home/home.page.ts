@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { GlobalService } from '../service/global.service';
-import { HomeService } from '../service/home.service';
+import { GlobalService } from '../../services/global.service';
+import { HomeService } from '../../services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -28,14 +28,14 @@ export class HomePage {
 
       for (let user of this.data) {
         if ((user.name == this.userName) && (user.password == this.userPassword)) {
-          this.service.catchUserData(user.name, user.type, user.theme);
+          this.service.catchUserData(user.name, user.theme);
           this.router.navigate(['/users-list']);
           console.log(user.theme);
           break;
         } else {
           console.log("Erro")
-          //alert("erro");
-          //break;
+          alert("erro");
+          break;
         }
       }
     });
