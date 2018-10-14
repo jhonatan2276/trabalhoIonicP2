@@ -17,7 +17,13 @@ export class HomePage {
   //Json data receiver
   data: any;
 
-  constructor (private service: GlobalService, private homeService: HomeService, private router: Router) {}
+  logginSucess: boolean;
+
+  constructor (
+    private service: GlobalService,
+    private homeService: HomeService,
+    private router: Router
+  ) {}
 
   login() {
     this.service.getUsers()
@@ -30,13 +36,19 @@ export class HomePage {
         if ((user.name == this.userName) && (user.password == this.userPassword)) {
           this.service.catchUserData(user.name, user.theme);
           this.router.navigate(['/users-list']);
-          console.log(user.theme);
+          this.logginSucess = true;
           break;
         } else {
-          console.log("Erro")
-          alert("erro");
-          break;
+          this.logginSucess = false;
         }
+      }
+
+      if (!this.logginSucess) {
+        this.service.simpleAlert(
+          "Usuário ou Senha Incorretos",
+          "Falha de Login",
+          "Tente Novamente"
+        )
       }
     });
   }

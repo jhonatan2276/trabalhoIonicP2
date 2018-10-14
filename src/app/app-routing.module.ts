@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'users-list', loadChildren: './pages/users-list/users-list.module#UsersListPageModule' },
   { path: 'classes-list', loadChildren: './pages/classes-list/classes-list.module#ClassesListPageModule' },
   { path: 'user-detail', loadChildren: './pages/user-detail/user-detail.module#UserDetailPageModule' },
+  { path: 'user-edit', loadChildren: './pages/user-edit/user-edit.module#UserEditPageModule' },
 ];
 
 @NgModule({

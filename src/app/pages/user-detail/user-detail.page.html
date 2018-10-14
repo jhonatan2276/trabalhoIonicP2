@@ -36,7 +36,8 @@
 
             <br>
 
-            <ion-button expand="full" (click)="editar()"><ion-icon name="create"></ion-icon> &nbsp; Editar</ion-button>
+            <ion-button expand="full" (click)="editUser()"><ion-icon slot="start" name="create"></ion-icon>Editar</ion-button>
+            <ion-button expand="full" color="danger" (click)="deleteUser(selectedUser?.id)"><ion-icon slot="start" name="trash"></ion-icon>Deletar</ion-button>
         </ion-card-content>
     </ion-card>
 </ion-content>

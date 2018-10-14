@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Dados de Usuário</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-label><b>Nome:</b></ion-label>
+  <ion-input id="rounded" required type="text" placeholder="Nome" [(ngModel)]="userName"></ion-input>
+
+  <ion-label><b>Email:</b></ion-label>
+  <ion-input id="rounded" required type="text" placeholder="Email" [(ngModel)]="userEmail"></ion-input>
+
+  <ion-label><b>Data Nascimento:</b></ion-label>
+  <ion-datetime id="rounded" display-format="DD MM YYYY" placeholder="Data Nascimento" [(ngModel)]="userDateBirth"></ion-datetime>
+
+  <ion-label><b>Status:</b></ion-label>
+  <ion-input id="rounded" required type="text" placeholder="Status" [(ngModel)]="userStatus"></ion-input>
+
+  <ion-label><b>Tema:</b></ion-label>
+  <ion-input id="rounded" required type="text" placeholder="Tema" [(ngModel)]="userTheme"></ion-input>
+
+  <ion-label><b>Curriculo:</b></ion-label>
+  <ion-textarea id="rounded" required placeholder="Curriculo" [(ngModel)]="userCurriculum"></ion-textarea>
+
+  <br>
+
+  <ion-button expand="full" color="success" (click)="save()"><ion-icon slot="start" name="checkmark-circle"></ion-icon>Salvar</ion-button>
+  <ion-button expand="full" color="danger" (click)="cancel()"><ion-icon slot="start" name="close-circle"></ion-icon>Cancelar</ion-button>
+</ion-content>
