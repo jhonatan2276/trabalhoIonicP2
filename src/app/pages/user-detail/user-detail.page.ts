@@ -11,6 +11,7 @@ export class UserDetailPage implements OnInit {
 
   userId: string;
   selectedUser: any;
+  dateString: string;
 
   constructor(
     private service: GlobalService,
@@ -21,7 +22,15 @@ export class UserDetailPage implements OnInit {
     this.userId = this.service.userId;
 
     this.service.getUserDetail(this.userId)
-    .subscribe(data => {this.selectedUser = data});
+    .subscribe(data => {this.selectedUser = data
+    this.dateToString();
+    });
+  }
+
+  dateToString() {
+    this.dateString = this.selectedUser.dateBirth.day.text+"/";
+    this.dateString = this.dateString+this.selectedUser.dateBirth.month.text+"/"
+    this.dateString = this.dateString+this.selectedUser.dateBirth.year.text;
   }
 
   editUser() {

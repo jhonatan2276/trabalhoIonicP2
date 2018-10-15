@@ -10,7 +10,9 @@ export class ClassesListPage implements OnInit {
 
   classes: any;
 
-  constructor(private service: GlobalService) { }
+  constructor(
+    private service: GlobalService
+  ) { }
 
   ngOnInit() {
     this.service.getClasses()

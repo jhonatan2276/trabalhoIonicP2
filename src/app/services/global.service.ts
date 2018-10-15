@@ -10,11 +10,15 @@ import { Router } from '@angular/router';
 
 export class GlobalService {
 
-  urlUsers: string = "http://192.168.0.101:3000/users";
-  urlClasses: string = "http://192.168.0.101:3000/classes";
+  //JSON Server IP
+  ip: string = "192.168.0.101";
+
+  urlAdmins: string = "http://"+this.ip+":3000/admins";
+  urlUsers: string = "http://"+this.ip+":3000/users";
+  urlClasses: string = "http://"+this.ip+":3000/classes";
   userId: string;
-  userName: string;
-  userTheme: string;
+  adminName: string;
+  adminTheme: string;
   
   editUserId: string;
   editUserName: string;
@@ -57,8 +61,8 @@ export class GlobalService {
   }
 
   catchUserData(name, theme) {
-    this.userName = name;
-    this.userTheme = theme;
+    this.adminName = name;
+    this.adminTheme = theme;
   }
 
   catchUserDataEdit(id, name, email, dateBirth, curriculum, status, theme) {
@@ -69,6 +73,10 @@ export class GlobalService {
     this.editUserCurriculum = curriculum;
     this.editUserStatus = status;
     this.editUserTheme = theme;
+  }
+
+  getAdmins() {
+    return this.http.get(this.urlAdmins)
   }
 
   getUsers() {

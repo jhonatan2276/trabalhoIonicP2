@@ -10,7 +10,7 @@ import { GlobalService } from './../../services/global.service';
 export class UsersListPage implements OnInit {
 
   pageTheme: string;
-  userName: string;
+  adminName: string;
   users: any;
 
   constructor(
@@ -19,8 +19,8 @@ export class UsersListPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userName = this.service.userName;
-    this.pageTheme = this.service.userTheme;
+    this.adminName = this.service.adminName;
+    this.pageTheme = this.service.adminTheme;
 
     this.service.getUsers()
     .subscribe(data => {this.users = data;

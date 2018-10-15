@@ -26,15 +26,13 @@ export class HomePage {
   ) {}
 
   login() {
-    this.service.getUsers()
+    this.service.getAdmins()
     .subscribe(data => {
       this.data = data;
 
-      console.log(this.data)
-
-      for (let user of this.data) {
-        if ((user.name == this.userName) && (user.password == this.userPassword)) {
-          this.service.catchUserData(user.name, user.theme);
+      for (let admin of this.data) {
+        if ((admin.login == this.userName) && (admin.password == this.userPassword)) {
+          this.service.catchUserData(admin.name, admin.theme);
           this.router.navigate(['/users-list']);
           this.logginSucess = true;
           break;

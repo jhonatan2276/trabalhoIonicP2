@@ -7,7 +7,10 @@ import { GlobalService } from './global.service';
 })
 export class HomeService {
 
-  constructor(private service: GlobalService, private alertController: AlertController) { }
+  constructor(
+    private service: GlobalService,
+    private alertController: AlertController
+  ) { }
 
   async recoveryPasswordAlert() {
     const alert = await this.alertController.create({
