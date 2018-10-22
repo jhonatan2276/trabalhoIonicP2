@@ -25,12 +25,13 @@ export class GlobalService {
   editUserEmail: string;
   edirUserDateBirth: string;
   editUserCurriculum: string;
-  editUserStatus: string;
+  editUserStatus: boolean;
   editUserTheme: string;
 
   serveResponse: any;
+  userDetail: any
 
-  //if 1 - POST / IF 2 - PUT
+  //IF 1 - POST / IF 2 - PUT
   actionType: number;
 
   constructor(
@@ -109,8 +110,7 @@ export class GlobalService {
       curriculum: curriculum,
       status: status,
       theme: theme
-    })
-    .subscribe(data => {this.serveResponse = data});
+    }).subscribe(data => {this.serveResponse = data});
   }
 
   async deleteUser(id) {

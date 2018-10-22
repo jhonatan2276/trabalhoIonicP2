@@ -12,6 +12,7 @@ export class UsersListPage implements OnInit {
   pageTheme: string;
   adminName: string;
   users: any;
+  selectedUser: any;
 
   constructor(
     private service: GlobalService,
@@ -38,6 +39,23 @@ export class UsersListPage implements OnInit {
   usersDetail(userId) {
     this.service.userId = userId;
     this.router.navigate(['/user-detail']);
+  }
+
+  editUser(userId) {
+    this.service.getUserDetail(userId)
+    .subscribe(data => {this.selectedUser = data
+    this.service.actionType = 2;
+    this.service.catchUserDataEdit(
+      this.selectedUser.id,
+      this.selectedUser.name,
+      this.selectedUser.email,
+      this.selectedUser.dateBirth,
+      this.selectedUser.curriculum,
+      this.selectedUser.status,
+      this.selectedUser.theme
+    )
+    this.router.navigate(['/user-edit']);
+    });
   }
 
   deleteUser(id) {

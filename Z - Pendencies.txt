@@ -1,0 +1,11 @@
+Slide professor Ativo - Quebrado - Não deu certo;
+Splash Screen
+AuthGuard
+Email BackEnd
+Turmas; (Opcional)
+
+---
+
+Parte nativa (cordova)
+Fechar Menu no Back
+https://www.gajotres.net/ionic-2-3-how-to-manage-hardware-back-button-event-like-a-pro/

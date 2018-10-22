@@ -12,6 +12,9 @@
         <ion-card-title>Acesso Usuário</ion-card-title>
     </ion-card-header>
     <ion-card-content>
+      <ion-item [class.hide]="validateFields()" lines="none">
+        <ion-label class="warning">Preencha todos os campos:</ion-label>
+      </ion-item>
       <ion-item>
         <ion-input required type="text" placeholder="Nome" [(ngModel)]="userName"></ion-input>
       </ion-item>
@@ -21,7 +24,7 @@
 
       <br>
 
-      <ion-button expand="full" (click)="login()"><ion-icon slot="start" name="person"></ion-icon>Login</ion-button>
+      <ion-button expand="full" (click)="login()" [disabled]="!validateFields()"><ion-icon slot="start" name="person"></ion-icon>Login</ion-button>
 
       <br>
 

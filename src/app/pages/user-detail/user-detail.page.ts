@@ -13,6 +13,10 @@ export class UserDetailPage implements OnInit {
   selectedUser: any;
   dateString: string;
 
+  //RealTime Variables
+  userStatusText: string;
+  userStatusColor: string;
+
   constructor(
     private service: GlobalService,
     private router: Router
@@ -23,14 +27,26 @@ export class UserDetailPage implements OnInit {
 
     this.service.getUserDetail(this.userId)
     .subscribe(data => {this.selectedUser = data
-    this.dateToString();
+    this.dateToString(this.selectedUser.dateBirth)
+    this.userStatusToString(this.selectedUser.status)
     });
   }
 
-  dateToString() {
-    this.dateString = this.selectedUser.dateBirth.day.text+"/";
-    this.dateString = this.dateString+this.selectedUser.dateBirth.month.text+"/"
-    this.dateString = this.dateString+this.selectedUser.dateBirth.year.text;
+  dateToString(date) {
+    this.dateString = date.day.text+"/";
+    this.dateString = this.dateString+date.month.text+"/"
+    this.dateString = this.dateString+date.year.text;
+  }
+
+  userStatusToString (status) {
+    console.log(status)
+    if (status == "true") {
+      this.userStatusText = "Ativo"
+      this.userStatusColor = "success"
+    } else {
+      this.userStatusText = "Inativo"
+      this.userStatusColor = "danger"
+    }
   }
 
   editUser() {

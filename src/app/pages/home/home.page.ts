@@ -54,4 +54,15 @@ export class HomePage {
   recoveryPassword() {
     this.homeService.recoveryPasswordAlert();
   }
+
+  validateFields() {
+    if (
+      !this.userName ||
+      !this.userPassword
+    ) {
+      return false
+    } else {
+      return true;
+    }
+  }
 }

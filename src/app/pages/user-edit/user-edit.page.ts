@@ -15,7 +15,7 @@ export class UserEditPage implements OnInit {
   userEmail: string;
   userDateBirth: string;
   userCurriculum: string;
-  userStatus: string;
+  userStatus: boolean;
   userTheme: string;
 
   constructor(
@@ -55,6 +55,8 @@ export class UserEditPage implements OnInit {
       )
     }
     this.clearVariables();
+    this.router.navigate(['/users-list']);
+    this.service.toastAlert("Registro Salvo", 2000, "bottom")
   }
   
   cancel() {
@@ -69,7 +71,22 @@ export class UserEditPage implements OnInit {
     this.service.editUserEmail = "";
     this.service.edirUserDateBirth = "";
     this.service.editUserCurriculum = "";
-    this.service.editUserStatus = "";
+    this.service.editUserStatus = false;
     this.service.editUserTheme = "";
+  }
+
+  validateFields() {
+    if (
+      !this.userName ||
+      !this.userEmail ||
+      !this.userDateBirth ||
+      !this.userCurriculum ||
+      !this.userStatus ||
+      !this.userTheme
+    ) {
+      return false
+    } else {
+      return true;
+    }
   }
 }
