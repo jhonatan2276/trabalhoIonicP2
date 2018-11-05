@@ -8,4 +8,6 @@ Turmas; (Opcional)
 
 Parte nativa (cordova)
 Fechar Menu no Back
-https://www.gajotres.net/ionic-2-3-how-to-manage-hardware-back-button-event-like-a-pro/
+-- https://www.gajotres.net/ionic-2-3-how-to-manage-hardware-back-button-event-like-a-pro/
+SQLite
+Camera
