@@ -1,0 +1,92 @@
+{
+  "admins": [
+    {
+      "name": "Administrator 01",
+      "login": "admin1",
+      "password": "admin",
+      "email": "admin1@email.com",
+      "theme": "medium",
+      "id": 1
+    },
+    {
+      "name": "Administrator 02",
+      "login": "admin2",
+      "password": "admin",
+      "email": "admin2@email.com",
+      "theme": "medium",
+      "id": 2
+    }
+  ],
+  "users": [
+    {
+      "name": "Professor 01",
+      "email": "professor1@email.com",
+      "dateBirth": {
+        "day": {
+          "text": "01",
+          "value": 1,
+          "columnIndex": 0
+        },
+        "month": {
+          "text": "12",
+          "value": 12,
+          "columnIndex": 1
+        },
+        "year": {
+          "text": "1997",
+          "value": 1997,
+          "columnIndex": 2
+        }
+      },
+      "photo": "../../assets/default-user-photo/default-user.png",
+      "curriculum": "Descrição Aqui...",
+      "status": true,
+      "theme": "medium",
+      "id": 1
+    },
+    {
+      "name": "Professor 02",
+      "email": "professor2@email.com",
+      "dateBirth": {
+        "day": {
+          "text": "05",
+          "value": 5,
+          "columnIndex": 0
+        },
+        "month": {
+          "text": "10",
+          "value": 10,
+          "columnIndex": 1
+        },
+        "year": {
+          "text": "1969",
+          "value": 1969,
+          "columnIndex": 2
+        }
+      },
+      "photo": "../../assets/default-user-photo/default-user.png",
+      "curriculum": "Descrição Aqui...",
+      "status": true,
+      "theme": "medium",
+      "id": 2
+    }
+  ],
+  "classes": [
+    {
+      "name": "Turma1",
+      "content": "Descrição Ementa...",
+      "starDate": "01/01/2018",
+      "endDate": "30/12/2018",
+      "professor": "Professor2",
+      "id": 1
+    },
+    {
+      "name": "Turma2",
+      "content": "Descrição Ementa...",
+      "starDate": "01/01/2018",
+      "endDate": "30/12/2018",
+      "professor": "Professor1",
+      "id": 2
+    }
+  ]
+}

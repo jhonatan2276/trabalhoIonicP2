@@ -23,9 +23,9 @@ export class GlobalService {
   editUserId: string;
   editUserName: string;
   editUserEmail: string;
-  edirUserDateBirth: string;
+  edirUserDateBirth: any;
   editUserCurriculum: string;
-  editUserStatus: boolean;
+  editUserStatus: number;
   editUserTheme: string;
 
   serveResponse: any;
@@ -33,6 +33,9 @@ export class GlobalService {
 
   //IF 1 - POST / IF 2 - PUT
   actionType: number;
+
+  //Auth Control
+  authenticatedUser: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -98,7 +101,11 @@ export class GlobalService {
       status: status,
       theme: theme
     })
-    .subscribe(data => {this.serveResponse = data});
+    .subscribe(data => {
+      this.serveResponse = data,
+      this.router.navigate(['/users-list']),
+      this.toastAlert("Registro Salvo", 2000, "bottom");
+    });
   }
 
   postUser(name, email, dateBirth, curriculum, status, theme) {
@@ -110,7 +117,11 @@ export class GlobalService {
       curriculum: curriculum,
       status: status,
       theme: theme
-    }).subscribe(data => {this.serveResponse = data});
+    }).subscribe(data => {
+      this.serveResponse = data,
+      this.router.navigate(['/users-list']),
+      this.toastAlert("Registro Salvo", 2000, "bottom");
+    });
   }
 
   async deleteUser(id) {

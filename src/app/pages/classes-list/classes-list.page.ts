@@ -16,7 +16,6 @@ export class ClassesListPage implements OnInit {
 
   ngOnInit() {
     this.service.getClasses()
-    .subscribe(data => {this.classes = data;
-    });
+    .subscribe(data => {this.classes = data});
   }
 }

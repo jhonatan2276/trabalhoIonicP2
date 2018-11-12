@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalService } from './../../services/global.service';
+import { DatabaseService } from './../../services/database.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-users-list',
@@ -11,29 +13,44 @@ export class UsersListPage implements OnInit {
 
   pageTheme: string;
   adminName: string;
-  users: any;
+  users: any[] = [];
   selectedUser: any;
 
   constructor(
     private service: GlobalService,
-    private router: Router
+    private router: Router,
+    private db: DatabaseService,
+    private dataloading: LoadingController
   ) { }
 
   ngOnInit() {
     this.adminName = this.service.adminName;
     this.pageTheme = this.service.adminTheme;
 
-    this.service.getUsers()
-    .subscribe(data => {this.users = data;
+    this.getUsers();
+  }
+
+  async getUsers() {
+    const loading = await this.dataloading.create({
+      message: 'Carregando Dados...',
+      spinner: 'circles',
+      animated: true
     });
+
+    await loading.present();
+    
+    this.db.getUsers()
+    .then((result: any[]) => {
+      this.users = result;
+    });
+
+    loading.dismiss();
   }
 
   doRefresh(event) {
-    this.service.getUsers()
-    .subscribe(data => {this.users = data;
+    this.getUsers();
     
     event.target.complete();
-    });
   }
 
   usersDetail(userId) {

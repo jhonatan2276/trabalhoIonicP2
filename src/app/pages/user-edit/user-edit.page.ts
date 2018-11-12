@@ -13,10 +13,12 @@ export class UserEditPage implements OnInit {
   id: string;
   userName: string;
   userEmail: string;
-  userDateBirth: string;
+  userDateBirth: any;
   userCurriculum: string;
-  userStatus: boolean;
+  userStatus: number;
   userTheme: string;
+
+  userDateBirthText: any;
 
   constructor(
     private service: GlobalService,
@@ -28,6 +30,15 @@ export class UserEditPage implements OnInit {
     this.userName = this.service.editUserName;
     this.userEmail = this.service.editUserEmail;
     this.userDateBirth = this.service.edirUserDateBirth;
+
+
+    //let dateString = this.userDateBirth.split("/").reverse().join("/");
+    //let newDate = new Date(dateString);
+
+    //this.userDateBirth = new Date(this.service.edirUserDateBirth.split("/").reverse().join("/")).toISOString();
+
+
+    //this.userDateBirth = newDate.toISOString();
     this.userCurriculum = this.service.editUserCurriculum;
     this.userStatus = this.service.editUserStatus;
     this.userTheme = this.service.editUserTheme;
@@ -55,8 +66,7 @@ export class UserEditPage implements OnInit {
       )
     }
     this.clearVariables();
-    this.router.navigate(['/users-list']);
-    this.service.toastAlert("Registro Salvo", 2000, "bottom")
+    alert(new Date(this.userDateBirth).toISOString());
   }
   
   cancel() {
@@ -65,14 +75,19 @@ export class UserEditPage implements OnInit {
     this.service.toastAlert("Cancelado pelo Usuário", 2000, 'bottom')
   }
 
+  extractDateText(date) {
+    var dateText = date.day.text+"/"+date.month.text+"/"+date.year.text;
+    return dateText;
+  }
+
   clearVariables() {
-    this.service.editUserId = "";
-    this.service.editUserName = "";
-    this.service.editUserEmail = "";
-    this.service.edirUserDateBirth = "";
-    this.service.editUserCurriculum = "";
-    this.service.editUserStatus = false;
-    this.service.editUserTheme = "";
+    this.service.editUserId = null;
+    this.service.editUserName = null;
+    this.service.editUserEmail = null;
+    this.service.edirUserDateBirth = null;
+    this.service.editUserCurriculum = null;
+    this.service.editUserStatus = null;
+    this.service.editUserTheme = null;
   }
 
   validateFields() {

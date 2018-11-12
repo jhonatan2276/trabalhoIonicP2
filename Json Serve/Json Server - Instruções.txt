@@ -1,0 +1,9 @@
+https://www.devpleno.com/json-server-como-criar-uma-rest-api-para-testes-de-forma-simples/
+https://stackoverflow.com/questions/51026532/json-server-cannot-access-via-local-ip
+
+json-server --watch db.json
+json-server --host 192.168.0.101 --watch db.json
+
+OBS: O IP deve ser substituido pelo IP da maquina onde está o arquivo JSON.
+
+A URL de acesso é: IP:3000 (192.168.0.101:3000)

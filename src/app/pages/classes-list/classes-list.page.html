@@ -9,9 +9,9 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor='let class of classes' (click)="exibiDetalhes(usuario.id)">
+    <ion-item *ngFor='let class of classes'>
       <ion-label>{{class?.name}}</ion-label>
-      <ion-icon slot="end" name="arrow-forward" (click)="alerta()"></ion-icon>
+      <ion-icon slot="end" name="lock"></ion-icon>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -7,10 +7,29 @@ import { GlobalService } from './global.service';
 })
 export class HomeService {
 
+  //Json data receiver
+  data: any;
+
+  emailCheck: boolean;
+
   constructor(
     private service: GlobalService,
     private alertController: AlertController
   ) { }
+
+  emailValidation(email) {
+    return this.service.getUsers()
+    .subscribe(data => {this.data = data;
+
+      for (let user of this.data) {
+        if (user.email == email) {
+          this.emailCheck = true;
+        } else {
+          this.emailCheck = false;
+        } 
+      }
+    })
+  }
 
   async recoveryPasswordAlert() {
     const alert = await this.alertController.create({

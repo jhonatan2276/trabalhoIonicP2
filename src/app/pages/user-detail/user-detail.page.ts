@@ -40,7 +40,7 @@ export class UserDetailPage implements OnInit {
 
   userStatusToString (status) {
     console.log(status)
-    if (status == "true") {
+    if (status == "1") {
       this.userStatusText = "Ativo"
       this.userStatusColor = "success"
     } else {
