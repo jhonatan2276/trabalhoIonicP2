@@ -12,9 +12,12 @@ import { LoadingController } from '@ionic/angular';
 export class UsersListPage implements OnInit {
 
   pageTheme: string;
-  adminName: string;
   users: any[] = [];
   selectedUser: any;
+
+  //NgModel Variables
+  searchText: string;
+  notShowClaerButton: boolean;
 
   constructor(
     private service: GlobalService,
@@ -24,7 +27,6 @@ export class UsersListPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.adminName = this.service.adminName;
     this.pageTheme = this.service.adminTheme;
 
     this.getUsers();
@@ -45,6 +47,8 @@ export class UsersListPage implements OnInit {
     });
 
     loading.dismiss();
+    this.notShowClaerButton = true;
+    this.searchText = null;
   }
 
   doRefresh(event) {
@@ -53,15 +57,64 @@ export class UsersListPage implements OnInit {
     event.target.complete();
   }
 
+  searchUser() {
+    this.db.searchUsers(this.searchText)
+    .then((result: any[]) => {
+      this.users = result;
+    });
+    this.notShowClaerButton = false;
+  }
+
   usersDetail(userId) {
     this.service.userId = userId;
     this.router.navigate(['/user-detail']);
   }
 
+
+  /*this.db.getUserById(this.userId)
+    .then((result: any[]) => {
+      this.selectedUser = result;
+
+
+  this.service.catchUserDataEdit(
+    this.selectedUser[0].id,
+    this.selectedUser[0].id_server,
+    this.selectedUser[0].name,
+    this.selectedUser[0].email,
+    this.selectedUser[0].dateBirth,
+    this.selectedUser[0].curriculum,
+    this.selectedUser[0].status,
+    this.selectedUser[0].theme
+  )
+  this.service.actionType = 2;
+  this.router.navigate(['/user-edit']);
+}*/
+
   editUser(userId) {
-    this.service.getUserDetail(userId)
-    .subscribe(data => {this.selectedUser = data
+    /*this.service.getUserDetail(userId)
+    .subscribe(data => {this.selectedUser = data*/
+    
+    this.db.getUserById(userId)
+    .then((result: any[]) => {this.selectedUser = result;
+
+    this.service.catchUserDataEdit(
+      this.selectedUser[0].id,
+      this.selectedUser[0].id_server,
+      this.selectedUser[0].name,
+      this.selectedUser[0].email,
+      this.selectedUser[0].dateBirth,
+      this.selectedUser[0].curriculum,
+      this.selectedUser[0].status,
+      this.selectedUser[0].theme
+    )
     this.service.actionType = 2;
+    this.router.navigate(['/user-edit']);
+  })
+
+
+
+
+    /*this.service.actionType = 2;
     this.service.catchUserDataEdit(
       this.selectedUser.id,
       this.selectedUser.name,
@@ -72,7 +125,7 @@ export class UsersListPage implements OnInit {
       this.selectedUser.theme
     )
     this.router.navigate(['/user-edit']);
-    });
+    });*/
   }
 
   deleteUser(id) {

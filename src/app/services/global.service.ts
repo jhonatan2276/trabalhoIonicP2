@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { DatabaseService } from './database.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,25 +12,24 @@ import { Router } from '@angular/router';
 export class GlobalService {
 
   //JSON Server IP
-  ip: string = "192.168.0.101";
+  ip: string = "192.168.0.101"; //Don't use LOCALHOST (Word), use NUMBER
 
   urlAdmins: string = "http://"+this.ip+":3000/admins";
   urlUsers: string = "http://"+this.ip+":3000/users";
   urlClasses: string = "http://"+this.ip+":3000/classes";
   userId: string;
-  adminName: string;
   adminTheme: string;
   
-  editUserId: string;
+  editUserId: number;
+  editUserIdServer: number
   editUserName: string;
   editUserEmail: string;
   edirUserDateBirth: any;
   editUserCurriculum: string;
-  editUserStatus: number;
+  editUserStatus: string;
   editUserTheme: string;
 
   serveResponse: any;
-  userDetail: any
 
   //IF 1 - POST / IF 2 - PUT
   actionType: number;
@@ -41,7 +41,8 @@ export class GlobalService {
     private http: HttpClient,
     private alertController: AlertController,
     private toast: ToastController,
-    private router: Router
+    private router: Router,
+    private db: DatabaseService
   ) { }
 
   async simpleAlert(title, subtitle, text) {
@@ -64,13 +65,13 @@ export class GlobalService {
     toast.present();
   }
 
-  catchUserData(name, theme) {
-    this.adminName = name;
+  catchUserData(theme) {
     this.adminTheme = theme;
   }
 
-  catchUserDataEdit(id, name, email, dateBirth, curriculum, status, theme) {
+  catchUserDataEdit(id, idServer, name, email, dateBirth, curriculum, status, theme) {
     this.editUserId = id;
+    this.editUserIdServer = idServer;
     this.editUserName = name;
     this.editUserEmail = email;
     this.edirUserDateBirth = dateBirth;
@@ -87,11 +88,11 @@ export class GlobalService {
     return this.http.get(this.urlUsers)
   }
 
-  getUserDetail(id) {
+  /*getUserDetail(id) {
     return this.http.get(`${this.urlUsers}/${id}`)
-  }
+  }*/
 
-  putUser(id, name, email, dateBirth, curriculum, status, theme) {
+  /*putUser(id, name, email, dateBirth, curriculum, status, theme) {
     this.http.put(`${this.urlUsers}/${id}`, {
       name: name,
       email: email,
@@ -106,9 +107,9 @@ export class GlobalService {
       this.router.navigate(['/users-list']),
       this.toastAlert("Registro Salvo", 2000, "bottom");
     });
-  }
+  }*/
 
-  postUser(name, email, dateBirth, curriculum, status, theme) {
+  /*postUser(name, email, dateBirth, curriculum, status, theme) {
     this.http.post(this.urlUsers, {
       name: name,
       email: email,
@@ -122,7 +123,7 @@ export class GlobalService {
       this.router.navigate(['/users-list']),
       this.toastAlert("Registro Salvo", 2000, "bottom");
     });
-  }
+  }*/
 
   async deleteUser(id) {
     const alert = await this.alertController.create({
@@ -139,11 +140,19 @@ export class GlobalService {
         }, {
           text: 'OK',
           handler: () => {
-            this.http.delete(`${this.urlUsers}/${id}`)
+            this.db.deleteUser(id)
+            .then(() => {
+              this.router.navigate(['/users-list']);
+              this.toastAlert("Registro Apagado", 2000, "bottom")
+            });
+
+
+
+            /*this.http.delete(`${this.urlUsers}/${id}`)
             .subscribe((response) => {console.log("Deleted")});
             this.toastAlert("Registro Apgado", 2000, 'bottom')
             this.router.navigate(['/users-list']);
-            console.log('Done');
+            console.log('Done');*/
           }
         }
       ]

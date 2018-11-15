@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar [color]="pageTheme">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{adminName}}</ion-title>
+    <ion-searchbar [(ngModel)]="searchText" (search)="searchUser()" placeholder="Buscar Usuários" animated></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -16,6 +16,10 @@
       refreshingText="Carregando...">
     </ion-refresher-content>
   </ion-refresher>
+
+  <ion-button expand="block" size="small" (click)="getUsers()" [(class.hide)]="notShowClaerButton" color="danger">
+      <ion-icon slot="start" name="remove-circle"></ion-icon>Limpar Resultados
+  </ion-button>
 
   <ion-list inset="true">
     <ion-item *ngFor='let user of users'>

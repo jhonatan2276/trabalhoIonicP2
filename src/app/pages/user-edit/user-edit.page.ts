@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GlobalService } from './../../services/global.service';
 import { Router } from '@angular/router';
+import { DatabaseService } from './../../services/database.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -10,23 +11,29 @@ import { Router } from '@angular/router';
 export class UserEditPage implements OnInit {
 
   //NgModel variables
-  id: string;
+  id: number;
+  userIdServer: number;
   userName: string;
   userEmail: string;
   userDateBirth: any;
   userCurriculum: string;
-  userStatus: number;
+  userStatus: string;
   userTheme: string;
 
   userDateBirthText: any;
 
+  //Default User Photo
+  defPhoto: string = '../../assets/default-user-photo/default-user.png';
+
   constructor(
     private service: GlobalService,
-    private router: Router
+    private router: Router,
+    private db: DatabaseService
   ) { }
 
   ngOnInit() {
     this.id = this.service.editUserId;
+    this.userIdServer = this.service.editUserIdServer;
     this.userName = this.service.editUserName;
     this.userEmail = this.service.editUserEmail;
     this.userDateBirth = this.service.edirUserDateBirth;
@@ -45,17 +52,50 @@ export class UserEditPage implements OnInit {
   }
 
   save() {
+    //IF NEW USER
     if (this.service.actionType == 1) {
-      this.service.postUser(
+      this.db.insertUser(
+        null,
+        this.userName,
+        this.userEmail,
+        this.userDateBirth,
+        this.defPhoto,
+        this.userCurriculum,
+        this.userStatus,
+        this.userTheme
+      )
+      .then(() => {
+        this.router.navigate(['/users-list']);
+        this.service.toastAlert("Salvo com Sucesso", 2000, "bottom");
+      })
+      .catch(() => this.service.simpleAlert("Erro", "Erro ao Salvar", "Falha ao Salvar Usuário"))
+      /*this.service.postUser(
         this.userName,
         this.userEmail,
         this.userDateBirth,
         this.userCurriculum,
         this.userStatus,
         this.userTheme
-      );
+      );*/
     } else {
-      this.service.putUser(
+      //IF EDIT USER
+      this.db.updateUser(
+        this.id,
+        this.userIdServer,
+        this.userName,
+        this.userEmail,
+        this.userDateBirth,
+        this.defPhoto,
+        this.userCurriculum,
+        this.userStatus,
+        this.userTheme
+      )
+      .then(() => {
+        this.router.navigate(['/users-list']);
+        this.service.toastAlert("Alterado com Sucesso", 2000, "bottom")
+      })
+
+      /*this.service.putUser(
         this.id,
         this.userName,
         this.userEmail,
@@ -63,10 +103,10 @@ export class UserEditPage implements OnInit {
         this.userCurriculum,
         this.userStatus,
         this.userTheme
-      )
+      )*/
     }
     this.clearVariables();
-    alert(new Date(this.userDateBirth).toISOString());
+    //alert(new Date(this.userDateBirth).toISOString());
   }
   
   cancel() {

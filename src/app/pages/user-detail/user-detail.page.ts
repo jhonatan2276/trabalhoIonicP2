@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GlobalService } from './../../services/global.service';
 import { Router } from '@angular/router';
+import { DatabaseService } from './../../services/database.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class UserDetailPage implements OnInit {
 
   userId: string;
-  selectedUser: any;
+  selectedUser: any[] = [];
   dateString: string;
 
   //RealTime Variables
@@ -19,17 +20,29 @@ export class UserDetailPage implements OnInit {
 
   constructor(
     private service: GlobalService,
-    private router: Router
+    private router: Router,
+    private db: DatabaseService
   ) { }
 
   ngOnInit() {
     this.userId = this.service.userId;
 
-    this.service.getUserDetail(this.userId)
+    this.db.getUserById(this.userId)
+    .then((result: any[]) => {
+      this.selectedUser = result;
+
+      //this.dateToString(this.selectedUser.dateBirth)
+      this.userStatusToString(this.selectedUser[0].status);
+    });
+
+
+
+
+    /*this.service.getUserDetail(this.userId)
     .subscribe(data => {this.selectedUser = data
     this.dateToString(this.selectedUser.dateBirth)
     this.userStatusToString(this.selectedUser.status)
-    });
+    });*/
   }
 
   dateToString(date) {
@@ -40,7 +53,7 @@ export class UserDetailPage implements OnInit {
 
   userStatusToString (status) {
     console.log(status)
-    if (status == "1") {
+    if (status == "true") {
       this.userStatusText = "Ativo"
       this.userStatusColor = "success"
     } else {
@@ -51,13 +64,14 @@ export class UserDetailPage implements OnInit {
 
   editUser() {
     this.service.catchUserDataEdit(
-      this.selectedUser.id,
-      this.selectedUser.name,
-      this.selectedUser.email,
-      this.selectedUser.dateBirth,
-      this.selectedUser.curriculum,
-      this.selectedUser.status,
-      this.selectedUser.theme
+      this.selectedUser[0].id,
+      this.selectedUser[0].id_server,
+      this.selectedUser[0].name,
+      this.selectedUser[0].email,
+      this.selectedUser[0].dateBirth,
+      this.selectedUser[0].curriculum,
+      this.selectedUser[0].status,
+      this.selectedUser[0].theme
     )
     this.service.actionType = 2;
     this.router.navigate(['/user-edit']);

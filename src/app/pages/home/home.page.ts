@@ -37,7 +37,7 @@ export class HomePage {
 
       for (let admin of this.data) {
         if ((admin.login == this.userName) && (admin.password == this.userPassword)) {
-          this.service.catchUserData(admin.name, admin.theme);
+          this.service.catchUserData(admin.theme);
           this.service.authenticatedUser = true;
           this.logginSucess = true;
           this.loadUsersServer();

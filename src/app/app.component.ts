@@ -52,6 +52,7 @@ export class AppComponent {
   }
 
   logout() {
+    this.db.clearDatabase();
     this.router.navigate(['/home']);
     this.service.authenticatedUser = false;
   }

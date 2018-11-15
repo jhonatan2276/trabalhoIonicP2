@@ -5,7 +5,7 @@
       "login": "admin1",
       "password": "admin",
       "email": "admin1@email.com",
-      "theme": "medium",
+      "theme": "primary",
       "id": 1
     },
     {
@@ -13,7 +13,7 @@
       "login": "admin2",
       "password": "admin",
       "email": "admin2@email.com",
-      "theme": "medium",
+      "theme": "danger",
       "id": 2
     }
   ],
@@ -24,119 +24,29 @@
       "dateBirth": "23/12/2013",
       "photo": "../../assets/default-user-photo/default-user.png",
       "curriculum": "Descrição Aqui...",
-      "status": "1",
+      "status": "true",
       "theme": "warning",
       "id": 1
     },
     {
-      "name": "Professor 333",
+      "name": "Marcos Junior",
       "email": "professor2@email.com",
       "dateBirth": "23/12/2013",
       "photo": "../../assets/default-user-photo/default-user.png",
       "curriculum": "Descrição Aqui...",
-      "status": "0",
+      "status": "false",
       "theme": "tertiary",
       "id": 2
     },
     {
-      "name": "Professor 4",
+      "name": "Jhonatan William",
       "email": "prof4@email.com",
       "dateBirth": "23/12/2013",
       "photo": "../../assets/default-user-photo/default-user.png",
       "curriculum": "Teste",
-      "status": "1",
+      "status": "true",
       "theme": "danger",
-      "id": 4
-    },
-    {
-      "name": "Marcos Junior",
-      "email": "marcos@email.com",
-      "dateBirth": "24/12/2008",
-      "photo": "../../assets/default-user-photo/default-user.png",
-      "curriculum": "ABCDEF",
-      "status": "1",
-      "theme": "dark",
-      "id": 5
-    },
-    {
-      "name": "André da Silva",
-      "email": "andreaaaa@email.com",
-      "dateBirth": "20/12/2006",
-      "photo": "../../assets/default-user-photo/default-user.png",
-      "curriculum": "Teste",
-      "status": "1",
-      "theme": "danger",
-      "id": 6
-    },
-    {
-      "name": "Jhonatan",
-      "email": "jhonata@email.com",
-      "dateBirth": "17/02/1991",
-      "photo": "../../assets/default-user-photo/default-user.png",
-      "curriculum": "teste",
-      "status": "1",
-      "theme": "success",
-      "id": 8
-    },
-    {
-      "name": "teste123",
-      "email": "teste",
-      "dateBirth": "31/01/2018",
-      "photo": "../../assets/default-user-photo/default-user.png",
-      "curriculum": "sdsdsd",
-      "status": "1",
-      "theme": "dark",
-      "id": 9
-    },
-    {
-      "name": "Novo Teste",
-      "email": "sdfsdfh",
-      "dateBirth": "01/01/2018",
-      "photo": "../../assets/default-user-photo/default-user.png",
-      "curriculum": "ffgdfg",
-      "status": "1",
-      "theme": "primary",
-      "id": 10
-    },
-    {
-      "name": "testestatus",
-      "email": "sdkfhsdfkhsdkfhsdkfhsdkjfh",
-      "dateBirth": "01/04/2011",
-      "photo": "../../assets/default-user-photo/default-user.png",
-      "curriculum": "fdgdfg",
-      "status": "0",
-      "theme": "danger",
-      "id": 11
-    },
-    {
-      "name": "aaaa",
-      "email": "aasasas",
-      "dateBirth": "23/12/2013",
-      "photo": "../../assets/default-user-photo/default-user.png",
-      "curriculum": "asasasas",
-      "status": "1",
-      "theme": "warning",
-      "id": 12
-    },
-    {
-      "name": "bbbbb",
-      "email": "bbbbb",
-      "dateBirth": "23/12/2013",
-      "photo": "../../assets/default-user-photo/default-user.png",
-      "curriculum": "vbvbvb",
-      "status": "0",
-      "theme": "success",
-      "id": 13
-    },
-    {
-      "name": "sdasdsad",
-      "email": "asdasdasdasd",
-      "dateBirth": "23/12/2013",
-      "photo": "../../assets/default-user-photo/default-user.png",
-      "curriculum": "asdasdsad",
-      "status": "0",
-      "theme": "warning",
-      "id": 14
+      "id": 3
     }
   ],
   "classes": [

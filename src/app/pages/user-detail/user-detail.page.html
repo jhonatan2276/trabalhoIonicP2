@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar [color]="selectedUser?.theme">
+  <ion-toolbar [color]="selectedUser[0].theme">
     <ion-buttons slot="start">
        <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -9,17 +9,17 @@
 
 <ion-content>
     <ion-card>
-        <ion-img class="image" [src]="selectedUser?.photo"></ion-img>
+        <ion-img class="image" [src]="selectedUser[0].photo"></ion-img>
         <ion-card-header>
-            <ion-card-title>{{selectedUser?.name}}</ion-card-title>
+            <ion-card-title>{{selectedUser[0].name}}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
             <ion-list>
                 <ion-item>
-                    <ion-label>ID: {{selectedUser?.id}}</ion-label>
+                    <ion-label>ID: {{selectedUser[0].id_server}}</ion-label>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Email: {{selectedUser?.email}}</ion-label>
+                    <ion-label>Email: {{selectedUser[0].email}}</ion-label>
                 </ion-item>
                 <ion-item>
                     <ion-label>Data Nascimento: {{dateString}}</ion-label>
@@ -32,13 +32,13 @@
                 <ion-item>
                     <ion-label>Curriculo: </ion-label>
                 </ion-item>
-                <p padding align="justify">{{selectedUser?.curriculum}}</p>
+                <p padding align="justify">{{selectedUser[0].curriculum}}</p>
             </ion-list>
 
             <br>
 
             <ion-button expand="full" (click)="editUser()"><ion-icon slot="start" name="create"></ion-icon>Editar</ion-button>
-            <ion-button expand="full" color="danger" (click)="deleteUser(selectedUser?.id)"><ion-icon slot="start" name="trash"></ion-icon>Deletar</ion-button>
+            <ion-button expand="full" color="danger" (click)="deleteUser(selectedUser[0].id)"><ion-icon slot="start" name="trash"></ion-icon>Deletar</ion-button>
         </ion-card-content>
     </ion-card>
 </ion-content>
