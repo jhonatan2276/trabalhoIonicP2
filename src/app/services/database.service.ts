@@ -35,7 +35,7 @@ export class DatabaseService {
         'id_server integer, '+
         'name TEXT, '+
         'email TEXT, '+
-        'dateBirth DATE, '+
+        'dateBirth TEXT, '+
         'photo TEXT, '+
         'curriculum TEXT, '+
         'status TEXT, '+
@@ -110,7 +110,7 @@ export class DatabaseService {
     .then((db: SQLiteObject) => {
       db.sqlBatch([
         ['insert into users (id_server, name, email, dateBirth, photo, curriculum, status, theme) values (?, ?, ?, ?, ?, ?, ?, ?)',
-        [idServer, name, email, new Date(dateBirth), photo, curriculum, status, theme]]
+        [idServer, name, email, dateBirth, photo, curriculum, status, theme]]
       ])
         .then(() => console.log('Dados Inseridos com Sucesso'))
         .catch(e => console.error('Erro ao incluir dados padrões', e));

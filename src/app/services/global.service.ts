@@ -24,7 +24,7 @@ export class GlobalService {
   editUserIdServer: number
   editUserName: string;
   editUserEmail: string;
-  edirUserDateBirth: any;
+  edirUserDateBirth: string;
   editUserCurriculum: string;
   editUserStatus: string;
   editUserTheme: string;

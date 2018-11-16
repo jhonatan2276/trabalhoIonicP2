@@ -12,6 +12,8 @@ export class UserDetailPage implements OnInit {
 
   userId: string;
   selectedUser: any[] = [];
+
+  //NgModel Variables
   dateString: string;
 
   //RealTime Variables
@@ -31,18 +33,19 @@ export class UserDetailPage implements OnInit {
     .then((result: any[]) => {
       this.selectedUser = result;
 
-      //this.dateToString(this.selectedUser.dateBirth)
+      this.dateConvert(this.selectedUser[0].dateBirth);
       this.userStatusToString(this.selectedUser[0].status);
     });
-
-
-
 
     /*this.service.getUserDetail(this.userId)
     .subscribe(data => {this.selectedUser = data
     this.dateToString(this.selectedUser.dateBirth)
     this.userStatusToString(this.selectedUser.status)
     });*/
+  }
+
+  dateConvert(date) {
+    this.dateString = date.split("-").reverse().join("/");
   }
 
   dateToString(date) {

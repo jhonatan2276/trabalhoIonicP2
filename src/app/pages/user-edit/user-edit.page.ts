@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GlobalService } from './../../services/global.service';
 import { Router } from '@angular/router';
 import { DatabaseService } from './../../services/database.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-user-edit',
@@ -15,12 +16,10 @@ export class UserEditPage implements OnInit {
   userIdServer: number;
   userName: string;
   userEmail: string;
-  userDateBirth: any;
+  userDateBirth: string;
   userCurriculum: string;
   userStatus: string;
   userTheme: string;
-
-  userDateBirthText: any;
 
   //Default User Photo
   defPhoto: string = '../../assets/default-user-photo/default-user.png';
@@ -37,15 +36,9 @@ export class UserEditPage implements OnInit {
     this.userName = this.service.editUserName;
     this.userEmail = this.service.editUserEmail;
     this.userDateBirth = this.service.edirUserDateBirth;
-
-
-    //let dateString = this.userDateBirth.split("/").reverse().join("/");
-    //let newDate = new Date(dateString);
-
-    //this.userDateBirth = new Date(this.service.edirUserDateBirth.split("/").reverse().join("/")).toISOString();
-
-
-    //this.userDateBirth = newDate.toISOString();
+    //Converts a Date to String and a String to ISO 8601 (to DateTime)
+    var dateText = moment(this.userDateBirth);     
+    this.userDateBirth = moment(dateText.format(), moment.ISO_8601).format();
     this.userCurriculum = this.service.editUserCurriculum;
     this.userStatus = this.service.editUserStatus;
     this.userTheme = this.service.editUserTheme;
@@ -58,7 +51,7 @@ export class UserEditPage implements OnInit {
         null,
         this.userName,
         this.userEmail,
-        this.userDateBirth,
+        this.userDateBirth = this.dateToText(this.userDateBirth),
         this.defPhoto,
         this.userCurriculum,
         this.userStatus,
@@ -84,7 +77,7 @@ export class UserEditPage implements OnInit {
         this.userIdServer,
         this.userName,
         this.userEmail,
-        this.userDateBirth,
+        this.userDateBirth = this.dateToText(this.userDateBirth),
         this.defPhoto,
         this.userCurriculum,
         this.userStatus,
@@ -115,9 +108,9 @@ export class UserEditPage implements OnInit {
     this.service.toastAlert("Cancelado pelo Usuário", 2000, 'bottom')
   }
 
-  extractDateText(date) {
-    var dateText = date.day.text+"/"+date.month.text+"/"+date.year.text;
-    return dateText;
+  dateToText(date) {
+    this.userDateBirth = date.year.text+'-'+date.month.text+'-'+date.day.text;
+    return this.userDateBirth;
   }
 
   clearVariables() {
