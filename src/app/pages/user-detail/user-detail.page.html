@@ -9,7 +9,11 @@
 
 <ion-content>
     <ion-card>
-        <ion-img class="image" [src]="selectedUser[0]?.photo"></ion-img>
+        <ion-item>
+            <ion-avatar class="image">
+                <ion-img [src]="selectedUser[0]?.photo"></ion-img>        
+            </ion-avatar>
+        </ion-item>
         <ion-card-header>
             <ion-card-title>{{selectedUser[0]?.name}}</ion-card-title>
         </ion-card-header>

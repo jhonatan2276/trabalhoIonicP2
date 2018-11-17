@@ -7,6 +7,15 @@
 <ion-content padding>
   <ion-label class="warning" [class.hide]="validateFields()">Preencha todos os campos:</ion-label>
 
+  <ion-item>
+    <ion-avatar class="image">
+        <ion-img [src]="userPhoto" (click)="takePicture()"></ion-img>
+    </ion-avatar>
+  </ion-item>
+  <ion-item>
+    <ion-label class="label-center">Clique na imagem para Alterar</ion-label>
+  </ion-item>
+
   <ion-item lines="none">
     <ion-label><b>Nome:</b></ion-label>
   </ion-item>

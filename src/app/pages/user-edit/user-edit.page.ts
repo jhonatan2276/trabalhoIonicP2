@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GlobalService } from './../../services/global.service';
 import { Router } from '@angular/router';
 import { DatabaseService } from './../../services/database.service';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import * as moment from 'moment';
 
 @Component({
@@ -17,6 +18,7 @@ export class UserEditPage implements OnInit {
   userName: string;
   userEmail: string;
   userDateBirth: any;
+  userPhoto: string;
   userCurriculum: string;
   userStatus: string;
   userTheme: string;
@@ -25,7 +27,7 @@ export class UserEditPage implements OnInit {
   dateDb: any;
 
   //Default User Photo
-  defPhoto: string = '../../assets/default-user-photo/default-user.png';
+  defaultUserPhoto: string = '../../assets/default-user-photo/default-user.png';
 
 
   selectedUser: any;
@@ -33,7 +35,8 @@ export class UserEditPage implements OnInit {
   constructor(
     private service: GlobalService,
     private router: Router,
-    private db: DatabaseService
+    private db: DatabaseService,
+    private camera: Camera
   ) { }
 
   ngOnInit() {
@@ -49,6 +52,11 @@ export class UserEditPage implements OnInit {
       this.dateText = moment(this.userDateBirth);   
       this.userDateBirth = moment(this.dateText.format(), moment.ISO_8601).format();    
     }*/
+    if (this.service.actionType == 1) {
+      this.userPhoto = this.defaultUserPhoto;
+    } else {
+      this.userPhoto = this.service.editUserPhoto;   
+    }
     this.userCurriculum = this.service.editUserCurriculum;
     this.userStatus = this.service.editUserStatus;
     this.userTheme = this.service.editUserTheme;
@@ -63,7 +71,8 @@ export class UserEditPage implements OnInit {
         this.userEmail,
         //this.userDateBirth = this.dateToText(this.userDateBirth),
         this.userDateBirth,
-        this.defPhoto,
+        //this.defPhoto,
+        this.userPhoto,
         this.userCurriculum,
         this.userStatus,
         this.userTheme
@@ -91,7 +100,8 @@ export class UserEditPage implements OnInit {
         //this.userDateBirth = this.dateToText(this.userDateBirth),
         //this.userDateBirth = "2018-01-25",
         this.userDateBirth,
-        this.defPhoto,
+        //this.defPhoto,
+        this.userPhoto,
         this.userCurriculum,
         this.userStatus,
         this.userTheme
@@ -120,6 +130,32 @@ export class UserEditPage implements OnInit {
     this.service.toastAlert("Cancelado pelo Usuário", 2000, 'bottom')
   }
 
+  takePicture() {
+    //this.photo = '';
+ 
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      allowEdit: true,
+      targetWidth: 100,
+      targetHeight: 100
+    }
+ 
+    this.camera.getPicture(options)
+      .then((imageData) => {
+        let base64image = 'data:image/jpeg;base64,' + imageData;
+        this.userPhoto = base64image;
+ 
+      }, (error) => {
+        console.error(error);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+  }
+
   dateToText(date) {
     this.dateDb = this.userDateBirth.year.text+'-'+this.userDateBirth.month.text+'-'+this.userDateBirth.day.text;
     alert(this.dateDb);
@@ -130,6 +166,7 @@ export class UserEditPage implements OnInit {
     this.service.editUserName = null;
     this.service.editUserEmail = null;
     this.service.edirUserDateBirth = null;
+    this.service.editUserPhoto = null;
     this.service.editUserCurriculum = null;
     this.service.editUserStatus = null;
     this.service.editUserTheme = null;

@@ -25,6 +25,7 @@ export class GlobalService {
   editUserName: string;
   editUserEmail: string;
   edirUserDateBirth: string;
+  editUserPhoto: string;
   editUserCurriculum: string;
   editUserStatus: string;
   editUserTheme: string;
@@ -65,12 +66,13 @@ export class GlobalService {
     toast.present();
   }
 
-  catchUserDataEdit(id, idServer, name, email, dateBirth, curriculum, status, theme) {
+  catchUserDataEdit(id, idServer, name, email, dateBirth, photo, curriculum, status, theme) {
     this.editUserId = id;
     this.editUserIdServer = idServer;
     this.editUserName = name;
     this.editUserEmail = email;
     this.edirUserDateBirth = dateBirth;
+    this.editUserPhoto = photo;
     this.editUserCurriculum = curriculum;
     this.editUserStatus = status;
     this.editUserTheme = theme;

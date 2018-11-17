@@ -72,6 +72,7 @@ export class UserDetailPage implements OnInit {
       this.selectedUser[0].name,
       this.selectedUser[0].email,
       this.selectedUser[0].dateBirth,
+      this.selectedUser[0].photo,
       this.selectedUser[0].curriculum,
       this.selectedUser[0].status,
       this.selectedUser[0].theme

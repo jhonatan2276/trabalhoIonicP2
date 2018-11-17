@@ -17,15 +17,10 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-button expand="block" size="small" (click)="getUsers()" [(class.hide)]="notShowClaerButton" color="danger">
-      <ion-icon slot="start" name="remove-circle"></ion-icon>Limpar Resultados
-  </ion-button>
-
   <ion-list inset="true">
     <ion-item *ngFor='let user of users'>
-        <ion-avatar slot="start" (click)="takePicture()">
-            <!-- <img [src]="user?.photo"> -->
-            <img [(src)]="photo">
+        <ion-avatar slot="start">
+            <img [src]="user?.photo">
         </ion-avatar>
         <ion-label (click)="usersDetail(user?.id)">
             <h2><b>{{user?.name}}</b></h2>
@@ -37,3 +32,9 @@
     </ion-item>
   </ion-list>
 </ion-content>
+
+<ion-footer padding [(class.hide)]="notShowClaerButton">
+  <ion-button expand="block" size="small" (click)="getUsers()" color="danger">
+      <ion-icon slot="start" name="remove-circle"></ion-icon>Limpar Resultados
+  </ion-button>
+</ion-footer>
