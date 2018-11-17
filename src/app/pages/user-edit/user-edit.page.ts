@@ -16,13 +16,19 @@ export class UserEditPage implements OnInit {
   userIdServer: number;
   userName: string;
   userEmail: string;
-  userDateBirth: string;
+  userDateBirth: any;
   userCurriculum: string;
   userStatus: string;
   userTheme: string;
 
+  dateText: any;
+  dateDb: any;
+
   //Default User Photo
   defPhoto: string = '../../assets/default-user-photo/default-user.png';
+
+
+  selectedUser: any;
 
   constructor(
     private service: GlobalService,
@@ -36,9 +42,13 @@ export class UserEditPage implements OnInit {
     this.userName = this.service.editUserName;
     this.userEmail = this.service.editUserEmail;
     this.userDateBirth = this.service.edirUserDateBirth;
-    //Converts a Date to String and a String to ISO 8601 (to DateTime)
-    var dateText = moment(this.userDateBirth);     
-    this.userDateBirth = moment(dateText.format(), moment.ISO_8601).format();
+    /*if (this.service.actionType == 1) {
+      this.userDateBirth = null;
+    } else {
+      //Converts a Date to String and this String to ISO 8601 (to DateTime)
+      this.dateText = moment(this.userDateBirth);   
+      this.userDateBirth = moment(this.dateText.format(), moment.ISO_8601).format();    
+    }*/
     this.userCurriculum = this.service.editUserCurriculum;
     this.userStatus = this.service.editUserStatus;
     this.userTheme = this.service.editUserTheme;
@@ -51,7 +61,8 @@ export class UserEditPage implements OnInit {
         null,
         this.userName,
         this.userEmail,
-        this.userDateBirth = this.dateToText(this.userDateBirth),
+        //this.userDateBirth = this.dateToText(this.userDateBirth),
+        this.userDateBirth,
         this.defPhoto,
         this.userCurriculum,
         this.userStatus,
@@ -77,7 +88,9 @@ export class UserEditPage implements OnInit {
         this.userIdServer,
         this.userName,
         this.userEmail,
-        this.userDateBirth = this.dateToText(this.userDateBirth),
+        //this.userDateBirth = this.dateToText(this.userDateBirth),
+        //this.userDateBirth = "2018-01-25",
+        this.userDateBirth,
         this.defPhoto,
         this.userCurriculum,
         this.userStatus,
@@ -87,7 +100,7 @@ export class UserEditPage implements OnInit {
         this.router.navigate(['/users-list']);
         this.service.toastAlert("Alterado com Sucesso", 2000, "bottom")
       })
-
+      .catch(() => this.service.simpleAlert("Erro", "Erro ao Salvar", "Falha ao Salvar Usuário"))
       /*this.service.putUser(
         this.id,
         this.userName,
@@ -99,7 +112,6 @@ export class UserEditPage implements OnInit {
       )*/
     }
     this.clearVariables();
-    //alert(new Date(this.userDateBirth).toISOString());
   }
   
   cancel() {
@@ -109,8 +121,8 @@ export class UserEditPage implements OnInit {
   }
 
   dateToText(date) {
-    this.userDateBirth = date.year.text+'-'+date.month.text+'-'+date.day.text;
-    return this.userDateBirth;
+    this.dateDb = this.userDateBirth.year.text+'-'+this.userDateBirth.month.text+'-'+this.userDateBirth.day.text;
+    alert(this.dateDb);
   }
 
   clearVariables() {

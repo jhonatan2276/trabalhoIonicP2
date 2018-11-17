@@ -65,10 +65,6 @@ export class GlobalService {
     toast.present();
   }
 
-  catchUserData(theme) {
-    this.adminTheme = theme;
-  }
-
   catchUserDataEdit(id, idServer, name, email, dateBirth, curriculum, status, theme) {
     this.editUserId = id;
     this.editUserIdServer = idServer;

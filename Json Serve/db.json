@@ -21,9 +21,9 @@
     {
       "name": "Professor 01",
       "email": "professor1@email.com",
-      "dateBirth": "2013-12-20",
+      "dateBirth": "30/12/1978",
       "photo": "../../assets/default-user-photo/default-user.png",
-      "curriculum": "Descrição Aqui...",
+      "curriculum": "Este campo possui um bug no momento de salvar uma alteração. Não consegui resolver de jeito nenhum, então resolvi desabilitá-lo. Retorna o seguinte erro: Cannot read property 'text' of undefined",
       "status": "true",
       "theme": "warning",
       "id": 1
@@ -31,9 +31,9 @@
     {
       "name": "Marcos Junior",
       "email": "professor2@email.com",
-      "dateBirth": "2013-10-30",
+      "dateBirth": "30/10/2013",
       "photo": "../../assets/default-user-photo/default-user.png",
-      "curriculum": "Descrição Aqui...",
+      "curriculum": "Este campo possui um bug no momento de salvar uma alteração. Não consegui resolver de jeito nenhum, então resolvi desabilitá-lo. Retorna o seguinte erro: Cannot read property 'text' of undefined",
       "status": "false",
       "theme": "tertiary",
       "id": 2
@@ -41,9 +41,9 @@
     {
       "name": "Jhonatan William",
       "email": "prof4@email.com",
-      "dateBirth": "1990-01-31",
+      "dateBirth": "31/01/1990",
       "photo": "../../assets/default-user-photo/default-user.png",
-      "curriculum": "Teste",
+      "curriculum": "Este campo possui um bug no momento de salvar uma alteração. Não consegui resolver de jeito nenhum, então resolvi desabilitá-lo. Retorna o seguinte erro: Cannot read property 'text' of undefined",
       "status": "true",
       "theme": "danger",
       "id": 3

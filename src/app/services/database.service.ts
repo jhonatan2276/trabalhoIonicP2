@@ -56,7 +56,6 @@ export class DatabaseService {
           this.dbItems = [];
           for (var i = 0; i < data.rows.length; i++) {
             var dbItem = data.rows.item(i);
-            console.log(dbItem);
             this.dbItems.push(dbItem);
           }
           return this.dbItems;
@@ -94,7 +93,6 @@ export class DatabaseService {
           this.dbItems = [];
           for (var i = 0; i < data.rows.length; i++) {
             var dbItem = data.rows.item(i);
-            console.log(dbItem);
             this.dbItems.push(dbItem);
           }
           return this.dbItems;

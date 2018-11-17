@@ -33,7 +33,7 @@ export class UserDetailPage implements OnInit {
     .then((result: any[]) => {
       this.selectedUser = result;
 
-      this.dateConvert(this.selectedUser[0].dateBirth);
+      //this.dateConvert(this.selectedUser[0].dateBirth);
       this.userStatusToString(this.selectedUser[0].status);
     });
 
