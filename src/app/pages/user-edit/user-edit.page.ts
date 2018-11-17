@@ -3,7 +3,7 @@ import { GlobalService } from './../../services/global.service';
 import { Router } from '@angular/router';
 import { DatabaseService } from './../../services/database.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import * as moment from 'moment';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-user-edit',
@@ -23,20 +23,19 @@ export class UserEditPage implements OnInit {
   userStatus: string;
   userTheme: string;
 
-  dateText: any;
-  dateDb: any;
-
   //Default User Photo
   defaultUserPhoto: string = '../../assets/default-user-photo/default-user.png';
 
-
-  selectedUser: any;
+  //TESTE
+  dateText: any;
+  dateDb: any;
 
   constructor(
     private service: GlobalService,
     private router: Router,
     private db: DatabaseService,
-    private camera: Camera
+    private camera: Camera,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -71,7 +70,6 @@ export class UserEditPage implements OnInit {
         this.userEmail,
         //this.userDateBirth = this.dateToText(this.userDateBirth),
         this.userDateBirth,
-        //this.defPhoto,
         this.userPhoto,
         this.userCurriculum,
         this.userStatus,
@@ -100,7 +98,6 @@ export class UserEditPage implements OnInit {
         //this.userDateBirth = this.dateToText(this.userDateBirth),
         //this.userDateBirth = "2018-01-25",
         this.userDateBirth,
-        //this.defPhoto,
         this.userPhoto,
         this.userCurriculum,
         this.userStatus,
@@ -130,30 +127,62 @@ export class UserEditPage implements OnInit {
     this.service.toastAlert("Cancelado pelo Usuário", 2000, 'bottom')
   }
 
-  takePicture() {
-    //this.photo = '';
- 
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      allowEdit: true,
-      targetWidth: 100,
-      targetHeight: 100
-    }
- 
-    this.camera.getPicture(options)
-      .then((imageData) => {
-        let base64image = 'data:image/jpeg;base64,' + imageData;
-        this.userPhoto = base64image;
- 
-      }, (error) => {
-        console.error(error);
-      })
-      .catch((error) => {
-        console.error(error);
-      })
+  async takePicture() {
+    const alert = await this.alertController.create({
+      header: 'Upload de Arquivo',
+      message: 'De onde deseja carregar a foto?',
+      buttons: [
+        {
+          text: 'Galeria',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            const optionsGallery: CameraOptions = {
+              quality: 100,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+              saveToPhotoAlbum: false
+            }
+         
+            this.camera.getPicture(optionsGallery)
+              .then((imageData) => {
+                let base64image = 'data:image/jpeg;base64,' + imageData;
+                this.userPhoto = base64image;
+              }, (error) => {
+                console.error(error);
+              })
+              .catch((error) => {
+                console.error(error);
+              })
+          }
+        }, {
+          text: 'Tirar uma Foto',
+          handler: () => {
+            const optionsCamera: CameraOptions = {
+              quality: 100,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.JPEG,
+              mediaType: this.camera.MediaType.PICTURE,
+              allowEdit: false,
+              targetWidth: 100,
+              targetHeight: 100
+            }
+         
+            this.camera.getPicture(optionsCamera)
+              .then((imageData) => {
+                let base64image = 'data:image/jpeg;base64,' + imageData;
+                console.log(base64image);
+                this.userPhoto = base64image;
+              }, (error) => {
+                console.error(error);
+              })
+              .catch((error) => {
+                console.error(error);
+              })
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
   dateToText(date) {

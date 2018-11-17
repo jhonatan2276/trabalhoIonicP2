@@ -13,10 +13,10 @@ export class UserDetailPage implements OnInit {
   userId: string;
   selectedUser: any[] = [];
 
-  //NgModel Variables
+  //NgModel variables
   dateString: string;
 
-  //RealTime Variables
+  //RealTime variables
   userStatusText: string;
   userStatusColor: string;
 

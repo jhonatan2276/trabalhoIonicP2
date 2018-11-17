@@ -16,9 +16,6 @@ export class DatabaseService {
   dbItems: any[] = [];
   dbUserId: any[] = [];
 
-  //TESTE
-  tPhoto: string = '../../assets/default-user-photo/default-user.png';
-
   constructor(
     private sqlite: SQLite
   ) { }
