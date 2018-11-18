@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { GlobalService } from './../../services/global.service';
 import { DatabaseService } from './../../services/database.service';
 import { LoadingController } from '@ionic/angular';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-users-list',
@@ -20,14 +19,11 @@ export class UsersListPage implements OnInit {
   searchText: string;
   notShowClaerButton: boolean;
 
-  photo: string = '';
-
   constructor(
     private service: GlobalService,
     private router: Router,
     private db: DatabaseService,
-    private dataloading: LoadingController,
-    private camera: Camera
+    private dataloading: LoadingController
   ) { }
 
   ngOnInit() {
@@ -133,29 +129,7 @@ export class UsersListPage implements OnInit {
     });*/
   }
 
-  deleteUser(id) {
-    this.service.deleteUser(id);
-  }
-
-
-  takePicture() {
-    this.photo = '';
-
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    };
-
-    this.camera.getPicture(options).then((imageData) => {
-     // imageData is either a base64 encoded string or a file URI
-     // If it's base64 (DATA_URL):
-     let base64Image = 'data:image/jpeg;base64,' + imageData;
-
-     this.photo = base64Image;
-    }, (err) => {
-     // Handle error
-    });
+  deleteUser(id, idServer) {
+    this.service.deleteUser(id, idServer);
   }
 }

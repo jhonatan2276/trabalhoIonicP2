@@ -81,7 +81,7 @@ export class UserDetailPage implements OnInit {
     this.router.navigate(['/user-edit']);
   }
 
-  deleteUser(id) {
-    this.service.deleteUser(id);
+  deleteUser(id, idServer) {
+    this.service.deleteUser(id, idServer);
   }
 }

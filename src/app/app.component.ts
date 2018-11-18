@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { GlobalService } from './services/global.service';
 import { DatabaseService } from './services/database.service';
+import { SyncService } from './services/sync.service';
 
 @Component({
   selector: 'app-root',
@@ -33,7 +34,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private service: GlobalService,
     private db: DatabaseService,
-    private router: Router
+    private router: Router,
+    private sync: SyncService
   ) {
     this.initializeApp();
   }
@@ -55,5 +57,6 @@ export class AppComponent {
     this.db.clearDatabase();
     this.router.navigate(['/home']);
     this.service.authenticatedUser = false;
+    clearInterval(this.sync.syncMonitor);
   }
 }

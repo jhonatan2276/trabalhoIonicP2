@@ -35,7 +35,7 @@ export class UserEditPage implements OnInit {
     private router: Router,
     private db: DatabaseService,
     private camera: Camera,
-    private alertController: AlertController
+    private alertController: AlertController,
   ) { }
 
   ngOnInit() {
@@ -61,72 +61,6 @@ export class UserEditPage implements OnInit {
     this.userTheme = this.service.editUserTheme;
   }
 
-  save() {
-    //IF NEW USER
-    if (this.service.actionType == 1) {
-      this.db.insertUser(
-        null,
-        this.userName,
-        this.userEmail,
-        //this.userDateBirth = this.dateToText(this.userDateBirth),
-        this.userDateBirth,
-        this.userPhoto,
-        this.userCurriculum,
-        this.userStatus,
-        this.userTheme
-      )
-      .then(() => {
-        this.router.navigate(['/users-list']);
-        this.service.toastAlert("Salvo com Sucesso", 2000, "bottom");
-      })
-      .catch(() => this.service.simpleAlert("Erro", "Erro ao Salvar", "Falha ao Salvar Usuário"))
-      /*this.service.postUser(
-        this.userName,
-        this.userEmail,
-        this.userDateBirth,
-        this.userCurriculum,
-        this.userStatus,
-        this.userTheme
-      );*/
-    } else {
-      //IF EDIT USER
-      this.db.updateUser(
-        this.id,
-        this.userIdServer,
-        this.userName,
-        this.userEmail,
-        //this.userDateBirth = this.dateToText(this.userDateBirth),
-        //this.userDateBirth = "2018-01-25",
-        this.userDateBirth,
-        this.userPhoto,
-        this.userCurriculum,
-        this.userStatus,
-        this.userTheme
-      )
-      .then(() => {
-        this.router.navigate(['/users-list']);
-        this.service.toastAlert("Alterado com Sucesso", 2000, "bottom")
-      })
-      .catch(() => this.service.simpleAlert("Erro", "Erro ao Salvar", "Falha ao Salvar Usuário"))
-      /*this.service.putUser(
-        this.id,
-        this.userName,
-        this.userEmail,
-        this.userDateBirth,
-        this.userCurriculum,
-        this.userStatus,
-        this.userTheme
-      )*/
-    }
-    this.clearVariables();
-  }
-  
-  cancel() {
-    this.clearVariables();
-    this.router.navigate(['/users-list']);
-    this.service.toastAlert("Cancelado pelo Usuário", 2000, 'bottom')
-  }
-
   async takePicture() {
     const alert = await this.alertController.create({
       header: 'Upload de Arquivo',
@@ -137,7 +71,7 @@ export class UserEditPage implements OnInit {
           cssClass: 'secondary',
           handler: (blah) => {
             const optionsGallery: CameraOptions = {
-              quality: 100,
+              quality: 50,
               destinationType: this.camera.DestinationType.DATA_URL,
               sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
               saveToPhotoAlbum: false
@@ -183,6 +117,79 @@ export class UserEditPage implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+  save() {
+    //IF NEW USER
+    if (this.service.actionType == 1) {
+      this.db.insertUser(
+        null,
+        this.userName,
+        this.userEmail,
+        //this.userDateBirth = this.dateToText(this.userDateBirth),
+        this.userDateBirth,
+        this.userPhoto,
+        this.userCurriculum,
+        this.userStatus,
+        this.userTheme
+      )
+      .then(() => {
+        this.router.navigate(['/users-list']);
+        this.service.toastAlert("Salvo com Sucesso", 2000, "bottom");
+        this.db.insertTaskSync(
+          "POST",
+          null,
+          this.userName,
+          this.userEmail,
+          //this.userDateBirth = this.dateToText(this.userDateBirth),
+          this.userDateBirth,
+          this.userPhoto,
+          this.userCurriculum,
+          this.userStatus,
+          this.userTheme
+        );
+      })
+      .catch(() => this.service.simpleAlert("Erro", "Erro ao Salvar", "Falha ao Salvar Usuário"))
+    } else {
+      //IF EDIT USER
+      this.db.updateUser(
+        this.id,
+        this.userIdServer,
+        this.userName,
+        this.userEmail,
+        //this.userDateBirth = this.dateToText(this.userDateBirth),
+        //this.userDateBirth = "2018-01-25",
+        this.userDateBirth,
+        this.userPhoto,
+        this.userCurriculum,
+        this.userStatus,
+        this.userTheme
+      )
+      .then(() => {
+        this.router.navigate(['/users-list']);
+        this.service.toastAlert("Alterado com Sucesso", 2000, "bottom");
+        this.db.insertTaskSync(
+          "PUT",
+          this.userIdServer,
+          this.userName,
+          this.userEmail,
+          //this.userDateBirth = this.dateToText(this.userDateBirth),
+          this.userDateBirth,
+          this.userPhoto,
+          this.userCurriculum,
+          this.userStatus,
+          this.userTheme
+        )
+      })
+      .catch(() => this.service.simpleAlert("Erro", "Erro ao Salvar", "Falha ao Salvar Usuário"))
+    }
+    this.clearVariables();
+  }
+  
+  cancel() {
+    this.clearVariables();
+    this.router.navigate(['/users-list']);
+    this.service.toastAlert("Cancelado pelo Usuário", 2000, 'bottom')
   }
 
   dateToText(date) {

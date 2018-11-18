@@ -15,6 +15,7 @@ export class DatabaseService {
 
   dbItems: any[] = [];
   dbUserId: any[] = [];
+  dbTasks: any[] = [];
 
   constructor(
     private sqlite: SQLite
@@ -27,7 +28,8 @@ export class DatabaseService {
   createDatabase() {
     this.getDatabase()
     .then((db: SQLiteObject) => {
-      db.executeSql('CREATE TABLE IF NOT EXISTS users ('+
+      db.sqlBatch([
+        ['CREATE TABLE IF NOT EXISTS users ('+
         'id integer primary key AUTOINCREMENT NOT NULL, '+
         'id_server integer, '+
         'name TEXT, '+
@@ -36,13 +38,26 @@ export class DatabaseService {
         'photo TEXT, '+
         'curriculum TEXT, '+
         'status TEXT, '+
-        'theme TEXT)', [])
-      .then(() => console.log('Tabela Criar ou Aberta com sucesso'))
+        'theme TEXT)', []],
+        ['CREATE TABLE IF NOT EXISTS sync ('+
+        'id integer primary key AUTOINCREMENT NOT NULL, '+
+        'type_service TEXT, '+
+        'id_server integer, '+
+        'name TEXT, '+
+        'email TEXT, '+
+        'dateBirth TEXT, '+
+        'photo TEXT, '+
+        'curriculum TEXT, '+
+        'status TEXT, '+
+        'theme TEXT)', []]
+      ])
+      .then(() => console.log('Tabelas Criadas ou Abertas com sucesso'))
       .catch(e => console.log(e));
     })
     .catch(e => console.log(e));
   }
 
+  //USER TABLE
   getUsers() {
     return this.getDatabase()
     .then((db: SQLiteObject) => {
@@ -108,7 +123,7 @@ export class DatabaseService {
         [idServer, name, email, dateBirth, photo, curriculum, status, theme]]
       ])
         .then(() => console.log('Dados Inseridos com Sucesso'))
-        .catch(e => console.error('Erro ao incluir dados padrões', e));
+        .catch(e => console.error('Erro ao incluir Dados = ', e));
     })
   }
 
@@ -119,7 +134,7 @@ export class DatabaseService {
         let data = [idServer, name, email, dateBirth, photo, curriculum, status, theme];
         db.executeSql(sql, data)
           .then(() => console.log('Dados Inseridos com Sucesso'))
-          .catch(e => console.error('Erro ao incluir dados padrões', e));
+          .catch(e => console.error('Erro ao Alterar Dados = ', e));
       })
   }
 
@@ -129,7 +144,50 @@ export class DatabaseService {
       let sql = 'delete from users where id = '+id;
       db.executeSql(sql, [])
       .then(() => console.log('Usuário Removido com Sucesso'))
-      .catch(e => console.error('Erro ao Remover Usuário', e));
+      .catch(e => console.error('Erro ao Remover Usuário = ', e));
+    })
+  }
+
+  //SYNC TABLE
+  getTasksSync() {
+    return this.getDatabase()
+    .then((db: SQLiteObject) => {
+      let sql = 'select * from sync';
+      return db.executeSql(sql, [])
+      .then((data: any) => {
+        if (data.rows.length > 0) {
+          this.dbTasks = [];
+          for (var i = 0; i < data.rows.length; i++) {
+            var dbTask = data.rows.item(i);
+            this.dbTasks.push(dbTask);
+          }
+          return this.dbTasks;
+        } else {
+          return [];
+        }
+      });
+    });
+  }
+
+  insertTaskSync(type, idServer, name, email, dateBirth, photo, curriculum, status, theme) {
+    return this.getDatabase()
+    .then((db: SQLiteObject) => {
+      db.sqlBatch([
+        ['insert into sync (type_service, id_server, name, email, dateBirth, photo, curriculum, status, theme) values (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [type, idServer, name, email, dateBirth, photo, curriculum, status, theme]]
+      ])
+        .then(() => console.log('Dados Inseridos com Sucesso'))
+        .catch(e => console.error('Erro ao incluir Dados = ', e));
+    })
+  }
+
+  deleteTaskSync(id) {
+    return this.getDatabase()
+    .then ((db: SQLiteObject) => {
+      let sql = 'delete from sync where id = '+id;
+      db.executeSql(sql, [])
+      .then(() => console.log('Task Removida com Sucesso'))
+      .catch(e => console.error('Erro ao Remover Task = ', e));
     })
   }
 
@@ -139,7 +197,7 @@ export class DatabaseService {
       let sql = 'delete from users';
       db.executeSql(sql, [])
       .then(() => console.log('Dados Removidos com Sucesso'))
-      .catch(e => console.error('Erro ao Remover dados', e));
+      .catch(e => console.error('Erro ao Remover Dados = ', e));
     })
   }
 }

@@ -28,7 +28,7 @@
             <p>Clique para Detalhes</p>
         </ion-label>
         <ion-icon slot="end" name="brush" color="primary" (click)="editUser(user?.id)"></ion-icon>
-        <ion-icon slot="end" name="trash" color="danger" (click)="deleteUser(user?.id)"></ion-icon>
+        <ion-icon slot="end" name="trash" color="danger" (click)="deleteUser(user?.id, user?.id_server)"></ion-icon>
     </ion-item>
   </ion-list>
 </ion-content>

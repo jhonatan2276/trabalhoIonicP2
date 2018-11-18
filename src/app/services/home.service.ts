@@ -10,26 +10,10 @@ export class HomeService {
   //Json data receiver
   data: any;
 
-  emailCheck: boolean;
-
   constructor(
     private service: GlobalService,
     private alertController: AlertController
   ) { }
-
-  emailValidation(email) {
-    return this.service.getUsers()
-    .subscribe(data => {this.data = data;
-
-      for (let user of this.data) {
-        if (user.email == email) {
-          this.emailCheck = true;
-        } else {
-          this.emailCheck = false;
-        } 
-      }
-    })
-  }
 
   async recoveryPasswordAlert() {
     const alert = await this.alertController.create({
@@ -52,15 +36,41 @@ export class HomeService {
         }, {
           text: 'Ok',
           handler: data => {
-            this.service.simpleAlert(
-              "Recuperação de Senha",
-              "Um email com instruções foi enviando para:",
-              data.email
-            )
+            this.checkEmail(data.email)
           }
         }
       ]
     })
     await alert.present();
+  }
+
+  checkEmail(email) {
+    let emailChecked: boolean = false;
+    this.service.getServerUsers()
+    .subscribe(data => {
+      this.data = data;
+      
+      for (let user of this.data) {
+        if (user.email == email) {
+          this.service.simpleAlert(
+            "Recuperação de Senha",
+            "Um email com instruções foi enviando para:",
+            email
+          )
+          emailChecked = true;
+          break;
+        } else {
+          console.log('Email Invalido')
+        }
+      }
+
+      if (emailChecked == false) {
+        this.service.simpleAlert(
+          "Recuperação de Senha",
+          "Este email é invalido:",
+          email
+        )
+      }
+    });
   }
 }

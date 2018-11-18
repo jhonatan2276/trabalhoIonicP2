@@ -19,34 +19,44 @@
   ],
   "users": [
     {
-      "name": "Professor 01",
-      "email": "professor1@email.com",
-      "dateBirth": "30/12/1978",
+      "name": "Roberto",
+      "email": "abc",
+      "dateBirth": "19/07/2001",
       "photo": "../../assets/default-user-photo/default-user.png",
-      "curriculum": "Este campo possui um bug no momento de salvar uma alteração. Não consegui resolver de jeito nenhum, então resolvi desabilitá-lo. Retorna o seguinte erro: Cannot read property 'text' of undefined",
+      "curriculum": "fccg",
       "status": "true",
-      "theme": "warning",
+      "theme": "success",
       "id": 1
     },
     {
-      "name": "Marcos Junior",
-      "email": "professor2@email.com",
-      "dateBirth": "30/10/2013",
+      "name": "Fulano de Tal",
+      "email": "khonatan",
+      "dateBirth": "17/02/1990",
       "photo": "../../assets/default-user-photo/default-user.png",
-      "curriculum": "Este campo possui um bug no momento de salvar uma alteração. Não consegui resolver de jeito nenhum, então resolvi desabilitá-lo. Retorna o seguinte erro: Cannot read property 'text' of undefined",
+      "curriculum": "fcc",
       "status": "false",
-      "theme": "tertiary",
+      "theme": "warning",
       "id": 2
     },
     {
-      "name": "Jhonatan William",
-      "email": "prof4@email.com",
-      "dateBirth": "31/01/1990",
+      "name": "João",
+      "email": "hdjdjcjf",
+      "dateBirth": "17/02/1991",
       "photo": "../../assets/default-user-photo/default-user.png",
-      "curriculum": "Este campo possui um bug no momento de salvar uma alteração. Não consegui resolver de jeito nenhum, então resolvi desabilitá-lo. Retorna o seguinte erro: Cannot read property 'text' of undefined",
+      "curriculum": "ddd",
       "status": "true",
-      "theme": "danger",
+      "theme": "dark",
       "id": 3
+    },
+    {
+      "name": "Marcos",
+      "email": "aaaa",
+      "dateBirth": "17/02/1990",
+      "photo": "../../assets/default-user-photo/default-user.png",
+      "curriculum": "ff",
+      "status": "true",
+      "theme": "success",
+      "id": 4
     }
   ],
   "classes": [

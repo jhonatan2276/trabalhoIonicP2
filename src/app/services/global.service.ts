@@ -78,52 +78,57 @@ export class GlobalService {
     this.editUserTheme = theme;
   }
 
-  getAdmins() {
+  getServerAdmins() {
     return this.http.get(this.urlAdmins)
   }
 
-  getUsers() {
+  getServerUsers() {
     return this.http.get(this.urlUsers)
   }
 
-  /*getUserDetail(id) {
-    return this.http.get(`${this.urlUsers}/${id}`)
-  }*/
-
-  /*putUser(id, name, email, dateBirth, curriculum, status, theme) {
+  putServerUser(id, name, email, dateBirth, photo, curriculum, status, theme) {
     this.http.put(`${this.urlUsers}/${id}`, {
       name: name,
       email: email,
       dateBirth: dateBirth,
-      photo: "../../assets/default-user-photo/default-user.png",
+      photo: photo,
       curriculum: curriculum,
       status: status,
       theme: theme
     })
     .subscribe(data => {
       this.serveResponse = data,
-      this.router.navigate(['/users-list']),
-      this.toastAlert("Registro Salvo", 2000, "bottom");
+      console.log('Dados Enviados - PUT', this.serveResponse);
     });
-  }*/
+  }
 
-  /*postUser(name, email, dateBirth, curriculum, status, theme) {
+  postServerUser(name, email, dateBirth, photo, curriculum, status, theme) {
     this.http.post(this.urlUsers, {
       name: name,
       email: email,
       dateBirth: dateBirth,
-      photo: "../../assets/default-user-photo/default-user.png",
+      photo: photo,
       curriculum: curriculum,
       status: status,
       theme: theme
     }).subscribe(data => {
       this.serveResponse = data,
-      this.router.navigate(['/users-list']),
-      this.toastAlert("Registro Salvo", 2000, "bottom");
+      console.log('Dados Enviados - POST', this.serveResponse);
     });
-  }*/
+  }
 
-  async deleteUser(id) {
+  deleteServerUser(id) {
+    this.http.delete(`${this.urlUsers}/${id}`)
+    .subscribe((response) => {
+      console.log('Dados Enviados - DELETE', response)
+    });
+  }
+
+  getClasses() {
+    return this.http.get(this.urlClasses)
+  }
+
+  async deleteUser(id, idServer) {
     const alert = await this.alertController.create({
       header: 'Atenção',
       message: 'Deseja Apagar esse Registro?',
@@ -141,24 +146,23 @@ export class GlobalService {
             this.db.deleteUser(id)
             .then(() => {
               this.router.navigate(['/users-list']);
-              this.toastAlert("Registro Apagado", 2000, "bottom")
+              this.toastAlert("Registro Apagado", 2000, "bottom");
+              this.db.insertTaskSync(
+                "DELETE",
+                idServer,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+              )
             });
-
-
-
-            /*this.http.delete(`${this.urlUsers}/${id}`)
-            .subscribe((response) => {console.log("Deleted")});
-            this.toastAlert("Registro Apgado", 2000, 'bottom')
-            this.router.navigate(['/users-list']);
-            console.log('Done');*/
           }
         }
       ]
     });
     await alert.present();
-  }
-
-  getClasses() {
-    return this.http.get(this.urlClasses)
   }
 }

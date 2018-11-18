@@ -4,6 +4,7 @@ import { GlobalService } from '../../services/global.service';
 import { HomeService } from '../../services/home.service';
 import { DatabaseService } from './../../services/database.service';
 import { LoadingController } from '@ionic/angular';
+import { SyncService } from '../../services/sync.service';
 
 @Component({
   selector: 'app-home',
@@ -28,10 +29,11 @@ export class HomePage {
     private router: Router,
     private db: DatabaseService,
     private dataloading: LoadingController,
+    private sync: SyncService
   ) {}
 
   login() {
-    this.service.getAdmins()
+    this.service.getServerAdmins()
     .subscribe(data => {
       this.data = data;
 
@@ -41,6 +43,7 @@ export class HomePage {
           this.service.authenticatedUser = true;
           this.logginSucess = true;
           this.loadUsersServer();
+          this.sync.startSyncMonitor();
           break;
         } else {
           this.logginSucess = false;
@@ -66,8 +69,10 @@ export class HomePage {
 
     await loading.present();
     
-    this.service.getUsers()
+    this.service.getServerUsers()
     .subscribe(data => {this.users = data;
+
+      this.db.clearDatabase();
 
       for (let i = 0; i < this.users.length; i++) {
         this.db.insertUser(
