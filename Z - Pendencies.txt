@@ -2,5 +2,4 @@ Slide professor Ativo - Quebrado - Não deu certo;
 
 ---
 
-Back Button
 LocalStorage

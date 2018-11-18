@@ -8,7 +8,7 @@ import { GlobalService } from './global.service';
 export class HomeService {
 
   //Json data receiver
-  data: any;
+  users: any;
 
   constructor(
     private service: GlobalService,
@@ -48,9 +48,9 @@ export class HomeService {
     let emailChecked: boolean = false;
     this.service.getServerUsers()
     .subscribe(data => {
-      this.data = data;
+      this.users = data;
       
-      for (let user of this.data) {
+      for (let user of this.users) {
         if (user.email == email) {
           this.service.simpleAlert(
             "Recuperação de Senha",

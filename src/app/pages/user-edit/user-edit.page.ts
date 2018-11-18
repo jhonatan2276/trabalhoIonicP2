@@ -35,7 +35,7 @@ export class UserEditPage implements OnInit {
     private router: Router,
     private db: DatabaseService,
     private camera: Camera,
-    private alertController: AlertController,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -59,6 +59,10 @@ export class UserEditPage implements OnInit {
     this.userCurriculum = this.service.editUserCurriculum;
     this.userStatus = this.service.editUserStatus;
     this.userTheme = this.service.editUserTheme;
+  }
+
+  clearPhoto() {
+    this.userPhoto = this.defaultUserPhoto;
   }
 
   async takePicture() {
@@ -147,7 +151,7 @@ export class UserEditPage implements OnInit {
           this.userCurriculum,
           this.userStatus,
           this.userTheme
-        );
+        )
       })
       .catch(() => this.service.simpleAlert("Erro", "Erro ao Salvar", "Falha ao Salvar Usuário"))
     } else {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -35,9 +35,11 @@ export class AppComponent {
     private service: GlobalService,
     private db: DatabaseService,
     private router: Router,
-    private sync: SyncService
+    private sync: SyncService,
+    private menu: MenuController
   ) {
     this.initializeApp();
+    this.backButtonMenu();
   }
 
   initializeApp() {
@@ -45,6 +47,14 @@ export class AppComponent {
       this.db.createDatabase();
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+    });
+  }
+
+  backButtonMenu() {
+    this.platform.backButton.subscribe(() => {
+      if (this.menu.isOpen()) {
+        this.menu.close();
+      }
     });
   }
 
@@ -57,6 +67,7 @@ export class AppComponent {
     this.db.clearDatabase();
     this.router.navigate(['/home']);
     this.service.authenticatedUser = false;
+    this.sync.dataSync();
     clearInterval(this.sync.syncMonitor);
   }
 }

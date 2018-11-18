@@ -8,7 +8,6 @@ import { DatabaseService } from './database.service';
 @Injectable({
   providedIn: 'root'
 })
-
 export class GlobalService {
 
   //JSON Server IP

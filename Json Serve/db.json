@@ -19,7 +19,7 @@
   ],
   "users": [
     {
-      "name": "Roberto",
+      "name": "Roberto Barros ass",
       "email": "abc",
       "dateBirth": "19/07/2001",
       "photo": "../../assets/default-user-photo/default-user.png",
@@ -39,7 +39,7 @@
       "id": 2
     },
     {
-      "name": "João",
+      "name": "João assss",
       "email": "hdjdjcjf",
       "dateBirth": "17/02/1991",
       "photo": "../../assets/default-user-photo/default-user.png",
@@ -49,7 +49,7 @@
       "id": 3
     },
     {
-      "name": "Marcos",
+      "name": "Marcos Junior",
       "email": "aaaa",
       "dateBirth": "17/02/1990",
       "photo": "../../assets/default-user-photo/default-user.png",
@@ -57,6 +57,36 @@
       "status": "true",
       "theme": "success",
       "id": 4
+    },
+    {
+      "name": "teste",
+      "email": "jhvgdhd",
+      "dateBirth": "17/02/1991",
+      "photo": "../../assets/default-user-photo/default-user.png",
+      "curriculum": "fhdhd",
+      "status": "true",
+      "theme": "medium",
+      "id": 5
+    },
+    {
+      "name": "dhshdb",
+      "email": "bfhdbbd",
+      "dateBirth": "chbshd",
+      "photo": "../../assets/default-user-photo/default-user.png",
+      "curriculum": "fjdjdn",
+      "status": "false",
+      "theme": "warning",
+      "id": 6
+    },
+    {
+      "name": "Matheus",
+      "email": "asd",
+      "dateBirth": "12/07/1990",
+      "photo": "../../assets/default-user-photo/default-user.png",
+      "curriculum": "ddd",
+      "status": "true",
+      "theme": "success",
+      "id": 7
     }
   ],
   "classes": [

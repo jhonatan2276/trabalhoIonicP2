@@ -18,7 +18,7 @@ export class HomePage {
   userPassword: string = "admin";
 
   //Json data receiver
-  data: any;
+  admins: any;
   users: any;
 
   logginSucess: boolean;
@@ -35,9 +35,9 @@ export class HomePage {
   login() {
     this.service.getServerAdmins()
     .subscribe(data => {
-      this.data = data;
+      this.admins = data;
 
-      for (let admin of this.data) {
+      for (let admin of this.admins) {
         if ((admin.login == this.userName) && (admin.password == this.userPassword)) {
           this.service.adminTheme = admin.theme;
           this.service.authenticatedUser = true;

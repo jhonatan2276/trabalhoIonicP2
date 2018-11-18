@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GlobalService } from './../../services/global.service';
 import { Router } from '@angular/router';
 import { DatabaseService } from './../../services/database.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-user-detail',
@@ -21,10 +22,13 @@ export class UserDetailPage implements OnInit {
   userStatusColor: string;
 
   constructor(
+    private platform: Platform,
     private service: GlobalService,
     private router: Router,
     private db: DatabaseService
-  ) { }
+  ) {
+    this.backButtonPageReturn()
+  }
 
   ngOnInit() {
     this.userId = this.service.userId;
@@ -36,12 +40,12 @@ export class UserDetailPage implements OnInit {
       //this.dateConvert(this.selectedUser[0].dateBirth);
       this.userStatusToString(this.selectedUser[0].status);
     });
+  }
 
-    /*this.service.getUserDetail(this.userId)
-    .subscribe(data => {this.selectedUser = data
-    this.dateToString(this.selectedUser.dateBirth)
-    this.userStatusToString(this.selectedUser.status)
-    });*/
+  backButtonPageReturn() {
+    this.platform.backButton.subscribe(() => {
+      this.router.navigate(['/users-list']);
+    });
   }
 
   dateConvert(date) {

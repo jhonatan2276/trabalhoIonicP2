@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 import { GlobalService } from './services/global.service';
 
@@ -26,6 +27,7 @@ import { GlobalService } from './services/global.service';
     AuthGuard,
     SQLite,
     Camera,
+    Keyboard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

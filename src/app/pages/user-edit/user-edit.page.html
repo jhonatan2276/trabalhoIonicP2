@@ -11,9 +11,10 @@
     <ion-avatar class="image">
         <ion-img [src]="userPhoto" (click)="takePicture()"></ion-img>
     </ion-avatar>
+  <ion-button color="danger" (click)="clearPhoto()">Limpar</ion-button>
   </ion-item>
   <ion-item>
-    <ion-label class="label-center">Clique na imagem para Alterar</ion-label>
+    <ion-badge [color]="primary" class="center-items">Clique na imagem para Alterar</ion-badge>
   </ion-item>
 
   <ion-item lines="none">
