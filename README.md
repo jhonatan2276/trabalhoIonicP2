@@ -4,7 +4,7 @@
 
 Utilizei como BackEnd da aplicação o Json Server, que nada mais é do que uma ferramenta que monitora um arquivo Json, possibilitando fazer as ações básicas de CRUD.
 
-## Para instalar e configurar:
+# Para instalar e configurar:
 
 1 – Execute o comando “npm install -g json-server”;
 2 – Após isso, navegue até a pasta do Json Server, onde se encontra o arquivo db.json;
@@ -13,9 +13,9 @@ Utilizei como BackEnd da aplicação o Json Server, que nada mais é do que uma 
 5 – Acessar o código fonte do projeto e navegar até a seguinte classe:
 trabalhoIonicP2\src\app\services > acessar a variável “Ip” e substituir o valor pelo IP da máquina onde está o servidor (Json Server);
 
-# Usuário para Login:
-User: admin1 - Senha: admin
-User: admin2 - Senha: admin
+## Usuário para Login:
+User: admin1 Senha: admin
+User: admin2 Senha: admin
 
 # Observações (Importante):
 
