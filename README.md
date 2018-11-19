@@ -29,7 +29,7 @@ Assim, dos tópicos sugeridos não consegui fazer os seguintes:
 Tive problemas com alguns itens (até gostaria de saber qual a forma correta de fazer), sendo eles:
 
 - 1 – ion-datepicker (tive MUITO problema com isso e desisti de usar, pois dependendo do modo (usuário novo ou edição de usuário) ele dava retornos diferentes e erros que não consegui achar solução, nem revirando a internet, portanto substitui esse componente pelo DatePicker Nativo do Android);
-OBS: No componente DatePicker do Android não consegui limitar a data, ou seja, não permitir a seleção de uma data futura. Eu segui a documentação colocando as instruções conforme estava no site do ionic, mas o componente simplesmente “ignorou” as condições, realmente não sei o pq.
+- OBS: No componente DatePicker do Android não consegui limitar a data, ou seja, não permitir a seleção de uma data futura. Eu segui a documentação colocando as instruções conforme estava no site do ionic, mas o componente simplesmente “ignorou” as condições, realmente não sei o pq.
 
 - 2 – Não consegui dar o “refresh” na lista depois de salvar / deletar um registro (tentei de tudo), por isso, sempre que salvar ou deletar um registro é preciso fazer o “Pull to Refresh” para atualizar a lista.
 
