@@ -4,7 +4,7 @@
 
 Utilizei como BackEnd da aplicação o Json Server, que nada mais é do que uma ferramenta que monitora um arquivo Json, possibilitando fazer as ações básicas de CRUD.
 
-# Para instalar e configurar:
+## Para instalar e configurar:
 
 - 1 – Execute o comando “npm install -g json-server”;
 - 2 – Após isso, navegue até a pasta do Json Server, onde se encontra o arquivo db.json;
