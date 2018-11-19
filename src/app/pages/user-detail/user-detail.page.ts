@@ -14,9 +14,6 @@ export class UserDetailPage implements OnInit {
   userId: string;
   selectedUser: any[] = [];
 
-  //NgModel variables
-  dateString: string;
-
   //RealTime variables
   userStatusText: string;
   userStatusColor: string;
@@ -37,7 +34,6 @@ export class UserDetailPage implements OnInit {
     .then((result: any[]) => {
       this.selectedUser = result;
 
-      //this.dateConvert(this.selectedUser[0].dateBirth);
       this.userStatusToString(this.selectedUser[0].status);
     });
   }
@@ -46,16 +42,6 @@ export class UserDetailPage implements OnInit {
     this.platform.backButton.subscribe(() => {
       this.router.navigate(['/users-list']);
     });
-  }
-
-  dateConvert(date) {
-    this.dateString = date.split("-").reverse().join("/");
-  }
-
-  dateToString(date) {
-    this.dateString = date.day.text+"/";
-    this.dateString = this.dateString+date.month.text+"/"
-    this.dateString = this.dateString+date.year.text;
   }
 
   userStatusToString (status) {

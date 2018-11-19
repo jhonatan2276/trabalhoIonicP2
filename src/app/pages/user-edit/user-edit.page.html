@@ -6,15 +6,13 @@
 
 <ion-content padding>
   <ion-label class="warning" [class.hide]="validateFields()">Preencha todos os campos:</ion-label>
-
   <ion-item>
     <ion-avatar class="image">
         <ion-img [src]="userPhoto" (click)="takePicture()"></ion-img>
     </ion-avatar>
-  <ion-button color="danger" (click)="clearPhoto()">Limpar</ion-button>
   </ion-item>
   <ion-item>
-    <ion-badge [color]="primary" class="center-items">Clique na imagem para Alterar</ion-badge>
+    <ion-label class="center-items">Clique na imagem para Alterar</ion-label>
   </ion-item>
 
   <ion-item lines="none">
@@ -35,8 +33,8 @@
     <ion-label><b>Data Nascimento:</b></ion-label>
   </ion-item>
   <ion-item>
-    <!-- <ion-datetime done-text="Ok" cancel-text="Cancelar" display-format="DD MM YYYY" placeholder="Data Nascimento" [(ngModel)]="userDateBirth"></ion-datetime> -->
-    <ion-input placeholder="Data Nascimento" [(ngModel)]="userDateBirth"></ion-input>
+      <ion-label (click)="openDatePicker()">{{userDateBirth}}</ion-label>
+      <ion-button size="default" color="primary" (click)="openDatePicker()"><ion-icon name="calendar"></ion-icon></ion-button>
   </ion-item>
 
   <ion-item lines="none">

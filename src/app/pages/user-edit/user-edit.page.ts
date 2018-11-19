@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { DatabaseService } from './../../services/database.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { AlertController } from '@ionic/angular';
+import { DatePicker } from '@ionic-native/date-picker/ngx';
 
 @Component({
   selector: 'app-user-edit',
@@ -26,16 +27,13 @@ export class UserEditPage implements OnInit {
   //Default User Photo
   defaultUserPhoto: string = '../../assets/default-user-photo/default-user.png';
 
-  //TESTE
-  dateText: any;
-  dateDb: any;
-
   constructor(
     private service: GlobalService,
     private router: Router,
     private db: DatabaseService,
     private camera: Camera,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private datePicker: DatePicker
   ) { }
 
   ngOnInit() {
@@ -44,13 +42,6 @@ export class UserEditPage implements OnInit {
     this.userName = this.service.editUserName;
     this.userEmail = this.service.editUserEmail;
     this.userDateBirth = this.service.edirUserDateBirth;
-    /*if (this.service.actionType == 1) {
-      this.userDateBirth = null;
-    } else {
-      //Converts a Date to String and this String to ISO 8601 (to DateTime)
-      this.dateText = moment(this.userDateBirth);   
-      this.userDateBirth = moment(this.dateText.format(), moment.ISO_8601).format();    
-    }*/
     if (this.service.actionType == 1) {
       this.userPhoto = this.defaultUserPhoto;
     } else {
@@ -65,6 +56,24 @@ export class UserEditPage implements OnInit {
     this.userPhoto = this.defaultUserPhoto;
   }
 
+  openDatePicker() {
+    this.datePicker.show({
+      date: new Date(),
+      mode: 'date',
+      maxDate: new Date(),
+      allowFutureDates: false,
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_LIGHT
+    }).then((date) => {
+      var dateObj = new Date(date);
+      var month = dateObj.getUTCMonth() + 1; 
+      var day = dateObj.getUTCDate();
+      var year = dateObj.getUTCFullYear();
+
+      this.userDateBirth = day+'/'+month+'/'+year;
+    }),
+      err => console.log('Erro ao abrir o DatePicker ', err);
+  }
+
   async takePicture() {
     const alert = await this.alertController.create({
       header: 'Upload de Arquivo',
@@ -73,7 +82,7 @@ export class UserEditPage implements OnInit {
         {
           text: 'Galeria',
           cssClass: 'secondary',
-          handler: (blah) => {
+          handler: () => {
             const optionsGallery: CameraOptions = {
               quality: 50,
               destinationType: this.camera.DestinationType.DATA_URL,
@@ -117,6 +126,12 @@ export class UserEditPage implements OnInit {
                 console.error(error);
               })
           }
+        }, {
+          text: 'Limpar',
+          cssClass: 'secondary',
+          handler: () => {
+            this.clearPhoto();
+          }
         }
       ]
     });
@@ -130,7 +145,6 @@ export class UserEditPage implements OnInit {
         null,
         this.userName,
         this.userEmail,
-        //this.userDateBirth = this.dateToText(this.userDateBirth),
         this.userDateBirth,
         this.userPhoto,
         this.userCurriculum,
@@ -145,7 +159,6 @@ export class UserEditPage implements OnInit {
           null,
           this.userName,
           this.userEmail,
-          //this.userDateBirth = this.dateToText(this.userDateBirth),
           this.userDateBirth,
           this.userPhoto,
           this.userCurriculum,
@@ -161,8 +174,6 @@ export class UserEditPage implements OnInit {
         this.userIdServer,
         this.userName,
         this.userEmail,
-        //this.userDateBirth = this.dateToText(this.userDateBirth),
-        //this.userDateBirth = "2018-01-25",
         this.userDateBirth,
         this.userPhoto,
         this.userCurriculum,
@@ -177,7 +188,6 @@ export class UserEditPage implements OnInit {
           this.userIdServer,
           this.userName,
           this.userEmail,
-          //this.userDateBirth = this.dateToText(this.userDateBirth),
           this.userDateBirth,
           this.userPhoto,
           this.userCurriculum,
@@ -194,11 +204,6 @@ export class UserEditPage implements OnInit {
     this.clearVariables();
     this.router.navigate(['/users-list']);
     this.service.toastAlert("Cancelado pelo Usuário", 2000, 'bottom')
-  }
-
-  dateToText(date) {
-    this.dateDb = this.userDateBirth.year.text+'-'+this.userDateBirth.month.text+'-'+this.userDateBirth.day.text;
-    alert(this.dateDb);
   }
 
   clearVariables() {

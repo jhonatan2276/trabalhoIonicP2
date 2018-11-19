@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { DatePicker } from '@ionic-native/date-picker/ngx';
 
 import { GlobalService } from './services/global.service';
 
@@ -28,6 +29,7 @@ import { GlobalService } from './services/global.service';
     SQLite,
     Camera,
     Keyboard,
+    DatePicker,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

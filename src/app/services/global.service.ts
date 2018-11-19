@@ -136,7 +136,7 @@ export class GlobalService {
           text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: (blah) => {
+          handler: () => {
             console.log('Canceled');
           }
         }, {

@@ -14,8 +14,8 @@ import { SyncService } from '../../services/sync.service';
 export class HomePage {
 
   //NgModel variables
-  userName: string = "admin1";
-  userPassword: string = "admin";
+  userName: string;
+  userPassword: string;
 
   //Json data receiver
   admins: any;

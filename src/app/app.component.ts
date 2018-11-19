@@ -64,10 +64,10 @@ export class AppComponent {
   }
 
   logout() {
+    this.sync.dataSync();
     this.db.clearDatabase();
     this.router.navigate(['/home']);
     this.service.authenticatedUser = false;
-    this.sync.dataSync();
     clearInterval(this.sync.syncMonitor);
   }
 }

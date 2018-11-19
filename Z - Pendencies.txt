@@ -1,5 +1,3 @@
 Slide professor Ativo - Quebrado - Não deu certo;
-
----
-
 LocalStorage
+Infinite Scroll

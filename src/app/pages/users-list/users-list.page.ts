@@ -16,7 +16,7 @@ export class UsersListPage implements OnInit {
   users: any[] = [];
   selectedUser: any;
 
-  //NgModel Variables
+  //NgModel variables
   searchText: string;
   notShowClaerButton: boolean;
 
@@ -55,7 +55,7 @@ export class UsersListPage implements OnInit {
 
   doRefresh(event) {
     this.getUsers();
-    
+
     event.target.complete();
   }
 
