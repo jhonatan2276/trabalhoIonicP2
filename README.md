@@ -11,7 +11,7 @@ Utilizei como BackEnd da aplicação o Json Server, que nada mais é do que uma 
 - 3 – Executar o comando “json-server --host “IP DA MÁQUINA” --watch db.json”;
 - 4 – Acessar a URL (http://IP DA MÁQUINA:3000/) via navegador, isso abrirá a página inicial do Json Server;
 - 5 – Acessar o código fonte do projeto e navegar até a seguinte classe:
-trabalhoIonicP2\src\app\services > acessar a variável “Ip” e substituir o valor pelo IP da máquina onde está o servidor (Json Server);
+trabalhoIonicP2\src\app\services > acessar o arquivo global.service e alterar a variável “Ip” substituindo o valor pelo IP da máquina onde está o servidor (Json Server);
 
 ## Usuário para Login:
 - User: admin1 Senha: admin
