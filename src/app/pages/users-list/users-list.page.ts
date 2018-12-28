@@ -34,6 +34,10 @@ export class UsersListPage implements OnInit {
     this.getUsers();
   }
 
+  ionViewDidEnter() {
+    this.getUsers();
+  }
+
   async getUsers() {
     const loading = await this.dataloading.create({
       message: 'Carregando Dados...',
